@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prospect Travel — Curated Luxury Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--off-white:#f7f4ef;--warm-white:#fdfbf8;--cream:#efe9df;--stone:#d4c9b8;--ink:#1c1917;--ink-mid:#44403c;--ink-light:#78716c;--ink-ghost:#a8a29e;--terra:#b5603f;--sand:#c4a97d;--sand-light:#e8dccb}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--ink);overflow-x:hidden;line-height:1.6}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2.5rem;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(253,251,248,0.93);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-bottom-color:var(--stone)}
+.logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;color:var(--ink);letter-spacing:.02em;text-decoration:none}
+.logo em{font-style:italic;color:var(--terra)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.82rem;color:var(--ink-mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink);color:#fff;padding:.5rem 1.2rem;border-radius:100px;font-size:.8rem;text-decoration:none;font-weight:500;transition:background .2s}
+.nav-cta:hover{background:var(--terra)}
+.hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;background:var(--off-white);padding-top:64px}
+.hero-left{padding:5rem 3rem 5rem 3.5rem;display:flex;flex-direction:column;justify-content:center}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:var(--cream);color:var(--ink-mid);font-size:.74rem;padding:.35rem .8rem;border-radius:100px;margin-bottom:2rem}
+.hero-tag span{width:6px;height:6px;border-radius:50%;background:var(--terra);display:inline-block}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.5vw,4.2rem);font-weight:400;line-height:1.1;color:var(--ink);margin-bottom:1.5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.hero-desc{font-size:1rem;color:var(--ink-light);line-height:1.75;max-width:420px;margin-bottom:2.5rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-dark{background:var(--ink);color:#fff;padding:.75rem 1.6rem;border-radius:100px;font-size:.85rem;text-decoration:none;font-weight:500;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-dark:hover{background:var(--terra)}
+.btn-outline{border:1.5px solid var(--stone);color:var(--ink);padding:.75rem 1.6rem;border-radius:100px;font-size:.85rem;text-decoration:none;font-weight:400;transition:all .2s}
+.btn-outline:hover{border-color:var(--ink-mid)}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--stone)}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:400;color:var(--ink);display:block}
+.stat-label{font-size:.75rem;color:var(--ink-ghost);display:block}
+.hero-right{position:relative;overflow:hidden;background:var(--cream)}
+.hero-mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;height:100%;gap:2px}
+.mosaic-cell{position:relative;overflow:hidden}
+.mosaic-cell:hover .mosaic-overlay{opacity:.4}
+.mosaic-overlay{position:absolute;inset:0;background:rgba(28,25,23,.15);transition:opacity .3s;opacity:.2}
+.mosaic-badge{position:absolute;bottom:.8rem;left:.8rem;background:rgba(253,251,248,.9);backdrop-filter:blur(8px);padding:.3rem .7rem;border-radius:100px;font-size:.65rem;color:var(--ink-mid);letter-spacing:.04em}
+.ph-italy{background:linear-gradient(155deg,#e8d0b8,#c4956a)}
+.ph-japan{background:linear-gradient(155deg,#e8c8d0,#c47a8a)}
+.ph-hawaii{background:linear-gradient(155deg,#b8d8e0,#5a9aaa)}
+.ph-disney{background:linear-gradient(155deg,#d8c8e8,#8858b8)}
+.ph-greece{background:linear-gradient(155deg,#c8d8f0,#5a7ab8)}
+.ph-mexico{background:linear-gradient(155deg,#e0d0a8,#b8943a)}
+.ph-alaska{background:linear-gradient(155deg,#c8dce0,#4a7888)}
+.ph-lasvegas{background:linear-gradient(155deg,#e8d8b8,#c4a048)}
+.ph-nyc{background:linear-gradient(155deg,#d0d0d8,#707080)}
+.ph-costarica{background:linear-gradient(155deg,#c0d8b8,#4a8850)}
+.ph-portugal{background:linear-gradient(155deg,#dcc8b8,#a87050)}
+.ph-parks{background:linear-gradient(155deg,#c8d0b8,#6a7848)}
+.ph-colorado{background:linear-gradient(155deg,#c8d4e0,#607888)}
+.ticker{background:var(--ink);padding:.9rem 0;overflow:hidden}
+.ticker-track{display:flex;gap:3rem;animation:tick 35s linear infinite;white-space:nowrap}
+.ticker-item{font-size:.78rem;color:rgba(255,255,255,.5);letter-spacing:.08em;display:flex;align-items:center;gap:1rem;flex-shrink:0}
+.ticker-dot{width:3px;height:3px;border-radius:50%;background:var(--terra);display:inline-block;flex-shrink:0}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.value-strip{background:var(--warm-white);border-top:1px solid var(--stone);border-bottom:1px solid var(--stone)}
+.value-inner{display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;max-width:1100px;margin:0 auto}
+.value-cell{padding:2.5rem 2rem}
+.value-divider{background:var(--stone)}
+.value-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:400;color:var(--terra);display:block;margin-bottom:.2rem}
+.value-label{font-size:.82rem;color:var(--ink-mid);font-weight:500}
+.value-desc{font-size:.78rem;color:var(--ink-ghost);margin-top:.25rem;line-height:1.5}
+.section{padding:5.5rem 3.5rem}
+.eyebrow{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:.6rem;display:block}
+h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:400;line-height:1.2;color:var(--ink)}
+h2 em{font-style:italic}
+.dest-section{background:var(--off-white)}
+.dest-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;max-width:1100px;margin-left:auto;margin-right:auto}
+.dest-header-link{font-size:.8rem;color:var(--ink-mid);text-decoration:none;border-bottom:1px solid var(--stone);padding-bottom:1px}
+.featured-bento{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:320px;gap:10px;max-width:1100px;margin:0 auto 10px}
+.feat-card{position:relative;border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .35s}
+.feat-card:hover{transform:scale(1.015)}
+.feat-card:hover .feat-overlay{opacity:1}
+.feat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,.75) 0%,rgba(28,25,23,.1) 55%,transparent 100%);opacity:.6;transition:opacity .3s}
+.feat-info{position:absolute;bottom:0;left:0;right:0;padding:1.4rem 1.6rem}
+.feat-region{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.2rem}
+.feat-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;color:#fff;line-height:1.1}
+.feat-card.hero-big .feat-name{font-size:2.2rem}
+.feat-tag{display:inline-block;margin-top:.5rem;font-size:.6rem;color:rgba(255,255,255,.65);background:rgba(255,255,255,.12);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2);padding:.18rem .55rem;border-radius:100px}
+.all-dest-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:1100px;margin:0 auto}
+.dest-card{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;height:160px;transition:transform .3s}
+.dest-card:hover{transform:translateY(-3px)}
+.dest-card:hover .dest-overlay{opacity:1}
+.dest-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,.72),rgba(28,25,23,.05));opacity:.65;transition:opacity .25s}
+.dest-info{position:absolute;bottom:0;left:0;right:0;padding:.9rem 1rem}
+.dest-region{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.15rem}
+.dest-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:#fff;line-height:1.1}
+.disney-section{background:var(--warm-white)}
+.disney-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1100px;margin:0 auto}
+.disney-card{background:linear-gradient(135deg,#2d1b4e 0%,#4a2c6e 55%,#6b3a8a 100%);border-radius:20px;padding:2.75rem;position:relative;overflow:hidden}
+.disney-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(240,192,64,.15),transparent 60%)}
+.disney-card-label{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(240,192,64,.8);margin-bottom:.75rem;position:relative;z-index:1}
+.disney-card-title{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:400;color:#fff;line-height:1.2;margin-bottom:1.25rem;position:relative;z-index:1}
+.disney-card-title em{font-style:italic;color:#f0c040}
+.disney-perks{list-style:none;margin-bottom:1.5rem;position:relative;z-index:1}
+.disney-perks li{font-size:.8rem;color:rgba(255,255,255,.7);padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:.75rem}
+.disney-perks li:last-child{border-bottom:none}
+.perk-dot{width:5px;height:5px;border-radius:50%;background:#f0c040;flex-shrink:0}
+.btn-disney{display:inline-flex;align-items:center;gap:.5rem;background:#f0c040;color:#2d1b4e;padding:.65rem 1.4rem;border-radius:100px;font-size:.78rem;font-weight:500;text-decoration:none;position:relative;z-index:1}
+.star-deco{position:absolute;font-size:.8rem;animation:sf 4s ease-in-out infinite alternate;color:rgba(240,192,64,.55)}
+@keyframes sf{from{transform:translateY(0) rotate(0deg)}to{transform:translateY(-8px) rotate(15deg)}}
+.guides-section{background:var(--off-white)}
+.guides-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1100px;margin:2rem auto 0}
+.guide-card{background:var(--warm-white);border:1px solid var(--stone);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s}
+.guide-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(28,25,23,.08)}
+.guide-img{height:180px;position:relative}
+.guide-body{padding:1.2rem 1.35rem 1.35rem}
+.guide-cat{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin-bottom:.35rem;display:block}
+.guide-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:.4rem}
+.guide-desc{font-size:.78rem;color:var(--ink-light);line-height:1.6}
+.guide-link{display:inline-flex;align-items:center;gap:.3rem;margin-top:.8rem;font-size:.72rem;color:var(--ink-mid);text-decoration:none}
+.guide-link::after{content:'→';transition:transform .2s}
+.guide-card:hover .guide-link::after{transform:translateX(3px)}
+.journal-section{background:var(--warm-white)}
+.journal-inner{max-width:1100px;margin:0 auto}
+.journal-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem}
+.journal-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:2.5rem}
+.journal-feat-img{border-radius:16px;height:320px;position:relative;overflow:hidden;margin-bottom:1.2rem}
+.blog-cat{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);display:block;margin-bottom:.3rem}
+.blog-h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;color:var(--ink);line-height:1.3;margin-bottom:.5rem}
+.blog-excerpt{font-size:.83rem;color:var(--ink-light);line-height:1.75}
+.blog-date{font-size:.7rem;color:var(--ink-ghost);margin-top:.7rem;display:block}
+.blog-list{display:flex;flex-direction:column;border-top:1px solid var(--stone)}
+.blog-item{display:flex;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--stone);cursor:pointer}
+.blog-item-img{width:76px;height:76px;border-radius:10px;flex-shrink:0;overflow:hidden}
+.blog-item-cat{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);display:block;margin-bottom:.2rem}
+.blog-item-title{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:400;color:var(--ink);line-height:1.3}
+.blog-item-date{font-size:.68rem;color:var(--ink-ghost);margin-top:.25rem;display:block}
+.ig-section{background:var(--off-white)}
+.ig-inner{max-width:1100px;margin:0 auto}
+.ig-header{text-align:center;margin-bottom:2rem}
+.ig-pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);color:#fff;padding:.4rem 1rem;border-radius:100px;font-size:.76rem;margin-bottom:.9rem}
+.ig-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;color:var(--ink)}
+.ig-title em{font-style:italic}
+.ig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.ig-cell{aspect-ratio:1;border-radius:12px;overflow:hidden;position:relative;cursor:pointer}
+.ig-cell:hover .ig-hover{opacity:1}
+.ig-hover{position:absolute;inset:0;background:rgba(28,25,23,.22);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.ig-sub{font-size:.73rem;color:var(--ink-ghost);text-align:center;margin-top:1.2rem}
+.ig-sub a{color:var(--ink-mid);text-decoration:none;border-bottom:1px solid var(--stone)}
+.cta-band{background:var(--ink);padding:5rem 3.5rem;text-align:center}
+.cta-eyebrow{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sand);margin-bottom:1rem;display:block}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:400;color:#fff;line-height:1.15;margin-bottom:1.4rem}
+.cta-title em{font-style:italic;color:var(--sand)}
+.cta-sub{font-size:.88rem;color:rgba(255,255,255,.5);max-width:400px;margin:0 auto 2rem;line-height:1.7}
+.btn-sand{background:var(--sand);color:var(--ink);padding:.85rem 2rem;border-radius:100px;font-size:.85rem;text-decoration:none;font-weight:500;display:inline-block}
+.fora-badge{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.4rem;font-size:.7rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
+.fora-badge::before,.fora-badge::after{content:'';height:1px;width:28px;background:rgba(255,255,255,.18);display:inline-block}
+footer{background:#0e0c0b;padding:4rem 3.5rem 2.5rem}
+.footer-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff}
+.footer-logo em{font-style:italic;color:var(--terra)}
+.footer-tagline{font-size:.76rem;color:rgba(255,255,255,.32);line-height:1.65;max-width:220px;margin-top:.75rem;font-weight:300}
+.footer-fora{display:inline-block;margin-top:1rem;font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.1);padding:.25rem .7rem;border-radius:100px}
+.footer-col-title{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:1rem}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:.5rem}
+.footer-links a{font-size:.8rem;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.72)}
+.footer-bottom{display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="logo">Prospect <em>Travel</em></a>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#disney">Disney</a></li>
+    <li><a href="#guides">Guides</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#instagram">Follow</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Start planning</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><span></span> Fora Travel Advisor</div>
+    <h1>The world,<br><em>beautifully</em><br>planned.</h1>
+    <p class="hero-desc">From Tuscan hillsides to Hawaiian shores, Japanese temples to Caribbean beaches — curated trips with exclusive perks, real expertise, and someone in your corner from booking to checkout.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-dark">Start planning ↗</a>
+      <a href="#destinations" class="btn-outline">Explore destinations</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-num">13</span><span class="stat-label">Specialist destinations</span></div>
+      <div><span class="stat-num">8,200+</span><span class="stat-label">Hotel & supplier partners</span></div>
+      <div><span class="stat-num">$0</span><span class="stat-label">Planning fees</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-mosaic">
+      <div class="mosaic-cell ph-italy"><div class="mosaic-overlay"></div><div class="mosaic-badge">Italy</div></div>
+      <div class="mosaic-cell ph-japan"><div class="mosaic-overlay"></div><div class="mosaic-badge">Japan</div></div>
+      <div class="mosaic-cell ph-hawaii"><div class="mosaic-overlay"></div><div class="mosaic-badge">Hawaii</div></div>
+      <div class="mosaic-cell ph-disney"><div class="mosaic-overlay"></div><div class="mosaic-badge">Disney</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span>Italy</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Japan</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Greece</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Portugal & Spain</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Hawaii</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Las Vegas</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>New York City</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Costa Rica</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Mexico & Caribbean</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Alaska Cruises</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>National Parks</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Colorado & Montana</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Walt Disney World</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Italy</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Japan</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Greece</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Portugal & Spain</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Hawaii</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Las Vegas</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>New York City</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Costa Rica</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Mexico & Caribbean</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Alaska Cruises</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>National Parks</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Colorado & Montana</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Walt Disney World</span>
+  </div>
+</div>
+
+<div class="value-strip">
+  <div class="value-inner">
+    <div class="value-cell">
+      <span class="value-num">Perks</span>
+      <div class="value-label">Built into every booking</div>
+      <div class="value-desc">Room upgrades, resort credits & breakfast from our Virtuoso and preferred partner network.</div>
+    </div>
+    <div class="value-divider"></div>
+    <div class="value-cell">
+      <span class="value-num">Free</span>
+      <div class="value-label">No planning fees</div>
+      <div class="value-desc">Hotels and suppliers compensate advisors directly — great trips cost you nothing extra.</div>
+    </div>
+    <div class="value-divider"></div>
+    <div class="value-cell">
+      <span class="value-num">On-call</span>
+      <div class="value-label">Someone in your corner</div>
+      <div class="value-desc">From first search to final checkout, you have a real person available if anything changes.</div>
+    </div>
+  </div>
+</div>
+
+<section class="dest-section section" id="destinations">
+  <div class="dest-header">
+    <div><span class="eyebrow">Where we go</span><h2>Featured <em>destinations</em></h2></div>
+    <a href="#guides" class="dest-header-link">View all guides →</a>
+  </div>
+  <div class="featured-bento">
+    <div class="feat-card hero-big ph-italy">
+      <div class="feat-overlay"></div>
+      <div class="feat-info"><div class="feat-region">Europe</div><div class="feat-name">Italy</div><span class="feat-tag">Rome · Tuscany · Amalfi · Venice</span></div>
+    </div>
+    <div class="feat-card ph-japan">
+      <div class="feat-overlay"></div>
+      <div class="feat-info"><div class="feat-region">Asia</div><div class="feat-name">Japan</div><span class="feat-tag">Tokyo · Kyoto · Osaka</span></div>
+    </div>
+    <div class="feat-card ph-hawaii">
+      <div class="feat-overlay"></div>
+      <div class="feat-info"><div class="feat-region">Pacific USA</div><div class="feat-name">Hawaii</div><span class="feat-tag">Maui · Kauai · Big Island</span></div>
+    </div>
+  </div>
+  <div class="all-dest-grid" style="margin-top:10px">
+    <div class="dest-card ph-greece"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">Europe</div><div class="dest-name">Greece</div></div></div>
+    <div class="dest-card ph-portugal"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">Europe</div><div class="dest-name">Portugal & Spain</div></div></div>
+    <div class="dest-card ph-disney"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">Orlando, FL</div><div class="dest-name">Disney & Orlando</div></div></div>
+    <div class="dest-card ph-mexico"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">Latin America</div><div class="dest-name">Mexico & Caribbean</div></div></div>
+    <div class="dest-card ph-costarica"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">Latin America</div><div class="dest-name">Costa Rica</div></div></div>
+    <div class="dest-card ph-alaska"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">Cruise</div><div class="dest-name">Alaska Cruises</div></div></div>
+    <div class="dest-card ph-parks"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">USA</div><div class="dest-name">National Parks</div></div></div>
+    <div class="dest-card ph-colorado"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">Mountain West</div><div class="dest-name">Colorado & Montana</div></div></div>
+    <div class="dest-card ph-lasvegas"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">Nevada</div><div class="dest-name">Las Vegas</div></div></div>
+    <div class="dest-card ph-nyc"><div class="dest-overlay"></div><div class="dest-info"><div class="dest-region">New York</div><div class="dest-name">New York City</div></div></div>
+  </div>
+</section>
+
+<section class="disney-section section" id="disney">
+  <div class="disney-inner">
+    <div>
+      <span class="eyebrow">Disney specialist</span>
+      <h2>Where every trip<br>becomes <em>a fairy tale.</em></h2>
+      <p style="font-size:.93rem;color:var(--ink-light);line-height:1.8;margin-top:1.2rem;max-width:420px;font-weight:300">Disney vacations are anything but ordinary — when you have the right advisor. I handle every reservation, every strategy, and every detail so your family can simply step into the magic.</p>
+      <p style="margin-top:.9rem;font-size:.93rem;color:var(--ink-light);line-height:1.8;max-width:420px;font-weight:300">Walt Disney World, Disneyland, and Disney Cruise Line — all with exclusive perks unlocked through our Fora partnership.</p>
+      <a href="#contact" class="btn-dark" style="margin-top:2rem;display:inline-flex">Plan your Disney trip ↗</a>
+    </div>
+    <div style="position:relative">
+      <div class="disney-card">
+        <div class="disney-card-label">✦ Disney Planning</div>
+        <div class="disney-card-title">What's included<br>in your <em>magic.</em></div>
+        <ul class="disney-perks">
+          <li><span class="perk-dot"></span>Full itinerary & park day strategy</li>
+          <li><span class="perk-dot"></span>Dining reservations & hard-to-get experiences</li>
+          <li><span class="perk-dot"></span>Resort selection & room category guidance</li>
+          <li><span class="perk-dot"></span>Lightning Lane & Genie+ optimization</li>
+          <li><span class="perk-dot"></span>On-call support arrival through departure</li>
+        </ul>
+        <a href="#contact" class="btn-disney">Let's plan ✦</a>
+      </div>
+      <div class="star-deco" style="top:-1rem;right:2rem">✦</div>
+      <div class="star-deco" style="top:2rem;right:-1rem;font-size:.55rem;animation-delay:-1.5s">✦</div>
+      <div class="star-deco" style="bottom:2rem;right:-.5rem;font-size:.65rem;animation-delay:-3s">✦</div>
+    </div>
+  </div>
+</section>
+
+<section class="guides-section section" id="guides">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div><span class="eyebrow">Essential reading</span><h2>Destination <em>guides</em></h2></div>
+      <a href="#" style="font-size:.8rem;color:var(--ink-mid);text-decoration:none;border-bottom:1px solid var(--stone);padding-bottom:1px">All guides →</a>
+    </div>
+  </div>
+  <div class="guides-grid">
+    <div class="guide-card"><div class="guide-img ph-italy"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,.4),transparent)"></div></div><div class="guide-body"><span class="guide-cat">Europe · Bucket List</span><div class="guide-title">The Prospect Guide to Italy</div><div class="guide-desc">Rome to Positano, Chianti to Venice — how to do Italy without the tourist traps, with every reservation worth making.</div><a href="https://yoursubstack.substack.com" target="_blank" class="guide-link">Read the guide</a></div></div>
+    <div class="guide-card"><div class="guide-img ph-japan"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,.4),transparent)"></div></div><div class="guide-body"><span class="guide-cat">Asia · Cultural Immersion</span><div class="guide-title">First-Timer's Guide to Japan</div><div class="guide-desc">Bullet trains, ryokans, Michelin ramen, temple districts — the essential Japan trip, structured by someone who's done it right.</div><a href="https://yoursubstack.substack.com" target="_blank" class="guide-link">Read the guide</a></div></div>
+    <div class="guide-card"><div class="guide-img ph-hawaii"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,.4),transparent)"></div></div><div class="guide-body"><span class="guide-cat">Pacific USA · Luxury Beach</span><div class="guide-title">Which Island? A Hawaii Decision Guide</div><div class="guide-desc">Maui vs. Kauai vs. the Big Island — the honest breakdown for every type of traveler, with the resort picks that deliver.</div><a href="https://yoursubstack.substack.com" target="_blank" class="guide-link">Read the guide</a></div></div>
+    <div class="guide-card"><div class="guide-img ph-greece"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,.4),transparent)"></div></div><div class="guide-body"><span class="guide-cat">Europe · Island Hopping</span><div class="guide-title">Greece Beyond Santorini</div><div class="guide-desc">Mykonos, Milos, Paros, Rhodes — the Greek islands that deliver the postcard without the cruise-ship crowd.</div><a href="https://yoursubstack.substack.com" target="_blank" class="guide-link">Read the guide</a></div></div>
+    <div class="guide-card"><div class="guide-img ph-disney"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,.4),transparent)"></div></div><div class="guide-body"><span class="guide-cat">Disney Planning</span><div class="guide-title">First-Timer's Guide to Walt Disney World</div><div class="guide-desc">Everything your family needs — including what the parks won't tell you — from a dedicated Disney specialist.</div><a href="prospect_travel_disney_guide.html" class="guide-link">Read the guide</a></div></div>
+    <div class="guide-card" style="background:var(--cream);border-style:dashed;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2.25rem 2rem;gap:.7rem"><div style="width:42px;height:42px;border-radius:50%;border:1.5px solid var(--stone);display:flex;align-items:center;justify-content:center;color:var(--ink-ghost);font-size:1.2rem">+</div><div style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--ink)">More <em>guides coming</em></div><div style="font-size:.76rem;color:var(--ink-ghost)">New destinations added regularly</div><a href="#contact" style="font-size:.72rem;color:var(--terra);text-decoration:none;border-bottom:1px solid rgba(181,96,63,.3);padding-bottom:1px">Get notified</a></div>
+  </div>
+</section>
+
+<section class="journal-section section" id="journal">
+  <div class="journal-inner">
+    <div class="journal-header">
+      <div><span class="eyebrow">The journal</span><h2>Travel notes &<br><em>inspiration</em></h2></div>
+      <a href="https://yoursubstack.substack.com" target="_blank" style="font-size:.8rem;color:var(--ink-mid);text-decoration:none;border-bottom:1px solid var(--stone);padding-bottom:1px">All posts →</a>
+    </div>
+    <div class="journal-grid">
+      <div>
+        <div class="journal-feat-img ph-italy"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,.35),transparent);border-radius:16px"></div></div>
+        <span class="blog-cat">Italy</span>
+        <div class="blog-h3">The Amalfi Coast Hotel That Changed How I Plan Trips</div>
+        <div class="blog-excerpt">Some hotels make you realize what the word "views" actually means. This one, perched above Positano with its own boat and a chef who sources everything from the village below, was that hotel.</div>
+        <span class="blog-date">May 2025 · 5 min read</span>
+      </div>
+      <div class="blog-list">
+        <div class="blog-item"><div class="blog-item-img ph-japan"></div><div><span class="blog-item-cat">Japan</span><div class="blog-item-title">Why Everyone Should Stay in a Ryokan at Least Once</div><span class="blog-item-date">April 2025</span></div></div>
+        <div class="blog-item"><div class="blog-item-img ph-hawaii"></div><div><span class="blog-item-cat">Hawaii</span><div class="blog-item-title">Maui vs. Kauai: After 11 Trips, Here's My Answer</div><span class="blog-item-date">March 2025</span></div></div>
+        <div class="blog-item"><div class="blog-item-img ph-disney"></div><div><span class="blog-item-cat">Disney</span><div class="blog-item-title">The Disney Dining Reservation Timeline Nobody Tells You</div><span class="blog-item-date">February 2025</span></div></div>
+        <div class="blog-item"><div class="blog-item-img ph-greece"></div><div><span class="blog-item-cat">Greece</span><div class="blog-item-title">The Island Everyone's Moving to After Santorini</div><span class="blog-item-date">January 2025</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ig-section section" id="instagram">
+  <div class="ig-inner">
+    <div class="ig-header">
+      <div class="ig-pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>@prospecttravel</div>
+      <div class="ig-title">Follow the <em>journey</em></div>
+    </div>
+    <div class="ig-grid">
+      <div class="ig-cell ph-italy"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-japan"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-hawaii"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-greece"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-disney"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-mexico"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-alaska" style="filter:brightness(.9)"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-costarica"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-portugal" style="filter:brightness(1.05)"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-parks"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-colorado" style="filter:brightness(.92)"><div class="ig-hover"></div></div>
+      <div class="ig-cell ph-lasvegas"><div class="ig-hover"></div></div>
+    </div>
+    <div class="ig-sub">See the world through our lens · <a href="https://instagram.com/prospecttravel">@prospecttravel</a></div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <span class="cta-eyebrow">Ready when you are</span>
+  <div class="cta-title">Your next trip starts<br>with a <em>conversation.</em></div>
+  <div class="cta-sub">Tell me where you want to go — I'll handle the rest, from the first hotel search to the final checkout.</div>
+  <a href="mailto:hello@prospecttravel.com" class="btn-sand">Get in touch →</a>
+  <div class="fora-badge">Member of the Fora Travel Network</div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Prospect <em>Travel</em></div>
+      <div class="footer-tagline">Curated luxury travel across 13 destinations worldwide — with the perks only a Fora advisor can unlock.</div>
+      <span class="footer-fora">Fora Travel Network</span>
+    </div>
+    <div>
+      <div class="footer-col-title">Destinations</div>
+      <ul class="footer-links">
+        <li><a href="#">Italy</a></li>
+        <li><a href="#">Japan</a></li>
+        <li><a href="#">Greece</a></li>
+        <li><a href="#">Hawaii</a></li>
+        <li><a href="#">Disney & Orlando</a></li>
+        <li><a href="#">Mexico & Caribbean</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">More destinations</div>
+      <ul class="footer-links">
+        <li><a href="#">Portugal & Spain</a></li>
+        <li><a href="#">Costa Rica</a></li>
+        <li><a href="#">Alaska Cruises</a></li>
+        <li><a href="#">National Parks</a></li>
+        <li><a href="#">Colorado & Montana</a></li>
+        <li><a href="#">Las Vegas · NYC</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="#">Destination Guides</a></li>
+        <li><a href="#">The Journal</a></li>
+        <li><a href="#">Disney Planning</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Start Planning</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Prospect Travel · Fora Travel Network</span>
+    <span>Luxury Travel Advisor</span>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+</script>
+</body>
+</html>

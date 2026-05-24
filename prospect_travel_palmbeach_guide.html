@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Palm Beach Guide — Prospect Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--off-white:#f7f4ef;--warm-white:#fdfbf8;--cream:#efe9df;--stone:#d4c9b8;--ink:#1c1917;--ink-mid:#44403c;--ink-light:#78716c;--ink-ghost:#a8a29e;--terra:#b5603f;--sand:#c4a97d;--dest-dark:#0a3a28;--dest-mid:#1a6a4a;--dest-accent:#a8d4b8}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--ink);overflow-x:hidden;line-height:1.6}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2.5rem;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(253,251,248,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--stone)}
+.logo{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:400;color:var(--ink);text-decoration:none}
+.logo em{font-style:italic;color:var(--terra)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.8rem;color:var(--ink-mid);text-decoration:none}
+.nav-cta{background:var(--ink);color:#fff;padding:0.5rem 1.2rem;border-radius:100px;font-size:0.78rem;text-decoration:none;font-weight:500}
+.hero{padding-top:64px;min-height:78vh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#0a3a28 0%,#1a6a4a 50%,#2a9a6a 100%)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,58,40,0.9) 0%,rgba(10,58,40,0.25) 55%,transparent 100%)}
+.hero-illus{position:absolute;right:6%;bottom:0;opacity:0.13;width:340px}
+.hero-content{position:relative;z-index:2;padding:4rem 4rem 4.5rem}
+.hero-breadcrumb{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem}
+.hero-breadcrumb a{font-size:0.74rem;color:rgba(255,255,255,0.45);text-decoration:none}
+.hero-breadcrumb span{font-size:0.7rem;color:rgba(255,255,255,0.3)}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(168,212,184,0.15);border:1px solid rgba(168,212,184,0.3);color:var(--dest-accent);font-size:0.72rem;padding:0.3rem 0.8rem;border-radius:100px;margin-bottom:1.2rem;letter-spacing:0.06em;text-transform:uppercase}
+.hero-tag span{width:5px;height:5px;border-radius:50%;background:var(--dest-accent);display:inline-block}
+h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:400;line-height:1.05;color:#fff;margin-bottom:1rem;max-width:700px}
+h1 em{font-style:italic;color:var(--dest-accent)}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,0.6);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:2rem}
+.hero-meta{display:flex;align-items:center;gap:2rem}
+.hero-meta-item{font-size:0.78rem;color:rgba(255,255,255,0.45)}
+.hero-meta-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.3)}
+.toc-bar{position:sticky;top:64px;z-index:90;background:var(--warm-white);border-bottom:1px solid var(--stone);padding:0 4rem}
+.toc-inner{display:flex;gap:0;overflow-x:auto}
+.toc-link{font-size:0.78rem;color:var(--ink-ghost);text-decoration:none;padding:1rem 1.25rem;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s}
+.toc-link:hover{color:var(--ink-mid)}
+.toc-link.active{color:var(--terra);border-bottom-color:var(--terra)}
+.page-body{max-width:1140px;margin:0 auto;padding:4rem 4rem 6rem}
+.two-col{display:grid;grid-template-columns:1fr 320px;gap:4rem;align-items:start}
+.side-col{position:sticky;top:130px}
+.section-block{margin-bottom:4rem;scroll-margin-top:130px}
+.eyebrow{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--terra);margin-bottom:0.6rem;display:block}
+h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:0.5rem}
+h2 em{font-style:italic}
+.section-intro{font-size:0.92rem;color:var(--ink-light);line-height:1.8;margin-bottom:2rem;max-width:620px;font-weight:300}
+.rule{height:1px;background:var(--stone);margin-bottom:2rem}
+.hotel-grid{display:flex;flex-direction:column;gap:1.25rem}
+.hotel-card{background:var(--off-white);border:1px solid var(--stone);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:180px 1fr;transition:box-shadow 0.3s}
+.hotel-card:hover{box-shadow:0 6px 28px rgba(28,25,23,0.08)}
+.hotel-img{min-height:150px}
+.hotel-body{padding:1.25rem 1.4rem}
+.hotel-tier{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin-bottom:0.4rem}
+.hotel-tier-dot{width:4px;height:4px;border-radius:50%;background:var(--terra)}
+.hotel-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;color:var(--ink);margin-bottom:0.3rem}
+.hotel-tagline{font-size:0.82rem;color:var(--ink-light);line-height:1.6;margin-bottom:0.75rem}
+.hotel-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.tag{font-size:0.65rem;background:var(--cream);color:var(--ink-mid);padding:0.2rem 0.55rem;border-radius:100px}
+.advisor-note{background:rgba(10,58,40,0.05);border:1px solid rgba(10,58,40,0.1);border-radius:10px;padding:0.75rem 1rem;margin-top:0.75rem;display:flex;gap:0.6rem}
+.advisor-note-icon{font-size:0.75rem;color:var(--dest-mid);flex-shrink:0;margin-top:1px}
+.advisor-note-text{font-size:0.75rem;color:var(--ink-mid);line-height:1.5;font-style:italic}
+.dining-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.dining-card{background:var(--off-white);border:1px solid var(--stone);border-radius:14px;padding:1.25rem 1.4rem;transition:transform 0.25s,box-shadow 0.25s}
+.dining-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(28,25,23,0.07)}
+.dining-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem}
+.dining-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:var(--ink);line-height:1.2}
+.dining-price{font-size:0.75rem;color:var(--ink-ghost)}
+.dining-loc{font-size:0.7rem;color:var(--terra);margin-bottom:0.5rem}
+.dining-desc{font-size:0.8rem;color:var(--ink-light);line-height:1.6}
+.dining-must{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.6rem;font-size:0.68rem;color:var(--ink-ghost)}
+.dining-must strong{color:var(--ink-mid);font-weight:500}
+.todo-list{display:flex;flex-direction:column}
+.todo-item{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--stone);align-items:start}
+.todo-item:last-child{border-bottom:none}
+.todo-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;color:var(--stone);line-height:1}
+.todo-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:0.25rem}
+.todo-desc{font-size:0.8rem;color:var(--ink-light);line-height:1.6}
+.todo-badge{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.4rem;font-size:0.65rem;color:var(--terra);background:rgba(181,96,63,0.08);padding:0.15rem 0.5rem;border-radius:100px}
+.transport-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.transport-card{background:var(--off-white);border:1px solid var(--stone);border-radius:14px;padding:1.25rem 1.4rem}
+.transport-icon{width:36px;height:36px;border-radius:10px;background:var(--cream);display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;font-size:1rem}
+.transport-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:0.3rem}
+.transport-desc{font-size:0.8rem;color:var(--ink-light);line-height:1.6}
+.transport-tip{font-size:0.73rem;color:var(--terra);margin-top:0.5rem;font-weight:500}
+.sidebar-card{background:var(--off-white);border:1px solid var(--stone);border-radius:16px;padding:1.5rem;margin-bottom:1.25rem}
+.sidebar-card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:1rem}
+.sidebar-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.sidebar-list li{font-size:0.8rem;color:var(--ink-mid);display:flex;align-items:flex-start;gap:0.5rem;line-height:1.5}
+.sidebar-list li::before{content:'✦';color:var(--terra);font-size:0.5rem;margin-top:0.3rem;flex-shrink:0}
+.sidebar-cta{background:var(--dest-dark);border-radius:16px;padding:1.75rem 1.5rem;text-align:center}
+.sidebar-cta-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:#fff;line-height:1.3;margin-bottom:0.6rem}
+.sidebar-cta-title em{font-style:italic;color:var(--dest-accent)}
+.sidebar-cta-desc{font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:1.25rem}
+.btn-accent{display:block;background:var(--dest-accent);color:var(--dest-dark);padding:0.7rem 1rem;border-radius:100px;font-size:0.8rem;font-weight:500;text-decoration:none;text-align:center}
+.sidebar-guide{background:var(--ink);border-radius:16px;padding:1.75rem 1.5rem;margin-top:1.25rem}
+.sidebar-guide-label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);margin-bottom:0.5rem;display:block}
+.sidebar-guide-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:#fff;line-height:1.35;margin-bottom:1rem}
+.sidebar-guide-title em{font-style:italic;color:var(--dest-accent)}
+.btn-outline-light{display:block;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.75);padding:0.65rem 1rem;border-radius:100px;font-size:0.78rem;text-decoration:none;text-align:center}
+.guide-cta-block{background:linear-gradient(135deg,var(--dest-dark),var(--dest-mid));border-radius:20px;padding:3rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;margin-top:3rem}
+.guide-cta-eyebrow{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(168,212,184,0.8);margin-bottom:0.5rem;display:block}
+.guide-cta-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;color:#fff;line-height:1.2;margin-bottom:0.5rem}
+.guide-cta-title em{font-style:italic;color:var(--dest-accent)}
+.guide-cta-desc{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7}
+.btn-accent-lg{display:inline-flex;align-items:center;gap:0.5rem;background:var(--dest-accent);color:var(--dest-dark);padding:0.85rem 1.75rem;border-radius:100px;font-size:0.85rem;font-weight:500;text-decoration:none;white-space:nowrap}
+.other-dest{margin-top:5rem;padding-top:3rem;border-top:1px solid var(--stone)}
+.other-dest-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:1.5rem}
+.other-dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.dest-pill-card{border-radius:14px;overflow:hidden;cursor:pointer;position:relative;height:140px;transition:transform 0.3s}
+.dest-pill-card:hover{transform:translateY(-3px)}
+.dest-pill-bg{position:absolute;inset:0}
+.dest-pill-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,0.72),transparent)}
+.dest-pill-info{position:absolute;bottom:0;left:0;right:0;padding:0.9rem 1rem}
+.dest-pill-region{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.15rem}
+.dest-pill-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:#fff}
+.bg-nantucket{background:linear-gradient(145deg,#c8d8e8,#7898b8)}
+.bg-aspen{background:linear-gradient(145deg,#dde4ec,#8fa5ba)}
+.bg-telluride{background:linear-gradient(145deg,#cfd8cc,#7a9478)}
+.bg-disney{background:linear-gradient(145deg,#ddd0e8,#9078b8)}
+.bg-palmbeach{background:linear-gradient(145deg,#c8ddd0,#6a9a80)}
+footer{background:#0e0c0b;padding:3rem 4rem 2rem}
+.footer-inner{display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1rem;color:#fff}
+.footer-logo em{font-style:italic;color:var(--terra)}
+.footer-links-row{display:flex;gap:2rem;list-style:none}
+.footer-links-row a{font-size:0.78rem;color:rgba(255,255,255,0.35);text-decoration:none}
+.footer-copy{font-size:0.7rem;color:rgba(255,255,255,0.2)}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">Prospect <em>Travel</em></a>
+  <ul class="nav-links"><li><a href="index.html#destinations">Destinations</a></li><li><a href="index.html#guides">Guides</a></li><li><a href="index.html#journal">Journal</a></li></ul>
+  <a href="index.html#contact" class="nav-cta">Start planning</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <svg class="hero-illus" viewBox="0 0 340 300" fill="none">
+    <circle cx="170" cy="80" r="55" fill="#a8d4b8" opacity="0.5"/>
+    <path d="M170 130 Q165 170 170 230" stroke="#a8d4b8" stroke-width="6" stroke-linecap="round"/>
+    <path d="M170 148 Q130 128 100 140" stroke="#f0ebe0" stroke-width="4" stroke-linecap="round"/>
+    <path d="M170 162 Q210 138 242 150" stroke="#f0ebe0" stroke-width="4" stroke-linecap="round"/>
+    <path d="M170 175 Q135 158 112 168" stroke="#f0ebe0" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M170 186 Q205 168 228 176" stroke="#f0ebe0" stroke-width="3" stroke-linecap="round"/>
+    <path d="M10 240 Q85 220 170 240 Q255 260 330 240 L330 300 L10 300Z" fill="#a8d4b8" opacity="0.4"/>
+    <path d="M10 260 Q100 245 190 260 Q270 275 330 260 L330 300 L10 300Z" fill="#a8d4b8" opacity="0.25"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-breadcrumb"><a href="index.html">Home</a><span>›</span><a href="index.html#destinations">Destinations</a><span>›</span><a href="#">Palm Beach</a></div>
+    <div class="hero-tag"><span></span> Coastal Specialist · Prospect Travel</div>
+    <h1>Palm Beach,<br><em>Florida</em></h1>
+    <p class="hero-desc">Worth Avenue glamour, oceanfront grandeur, and a dining scene that has quietly become world-class. The American Riviera — done properly, with the right reservations in hand.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">✦ Palm Beach Island, Florida</div>
+      <div class="hero-meta-dot"></div>
+      <div class="hero-meta-item">Peak Season: January – April</div>
+      <div class="hero-meta-dot"></div>
+      <div class="hero-meta-item">PBI · FLL · MIA</div>
+    </div>
+  </div>
+</section>
+
+<div class="toc-bar"><div class="toc-inner">
+  <a href="#hotels" class="toc-link active">Where to Stay</a>
+  <a href="#dining" class="toc-link">Dining</a>
+  <a href="#todo" class="toc-link">Things to Do</a>
+  <a href="#getting-there" class="toc-link">Getting There</a>
+  <a href="#guide" class="toc-link">Full Guide ↗</a>
+</div></div>
+
+<div class="page-body"><div class="two-col">
+<div class="main-col">
+
+  <div class="section-block" id="hotels">
+    <span class="eyebrow">Where to Stay</span>
+    <h2>Palm Beach's <em>finest addresses</em></h2>
+    <p class="section-intro">Palm Beach has a short list of truly great hotels — and each has its own distinct personality. The choice here shapes everything else about your trip.</p>
+    <div class="rule"></div>
+    <div class="hotel-grid">
+
+      <div class="hotel-card">
+        <div class="hotel-img bg-palmbeach"></div>
+        <div class="hotel-body">
+          <div class="hotel-tier"><span class="hotel-tier-dot"></span> Iconic · The Palm Beach Institution</div>
+          <div class="hotel-name">The Breakers Palm Beach</div>
+          <div class="hotel-tagline">The grande dame of Florida luxury — a 538-room oceanfront palazzo in business since 1896. Italian Renaissance architecture, multiple pools, a private beach, and more restaurants than you can visit in a week.</div>
+          <div class="hotel-tags"><span class="tag">Oceanfront</span><span class="tag">Private Beach</span><span class="tag">3 Pools</span><span class="tag">10 Restaurants</span><span class="tag">Spa</span></div>
+          <div class="advisor-note"><span class="advisor-note-icon">✦</span><span class="advisor-note-text">Request an ocean-facing room in the main building — the sunrise views justify the upgrade. The Seafood Bar is the best lunch on property; don't skip it.</span></div>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-img" style="background:linear-gradient(145deg,#e0eed8,#98c878)"></div>
+        <div class="hotel-body">
+          <div class="hotel-tier"><span class="hotel-tier-dot"></span> Boutique · Most Intimate</div>
+          <div class="hotel-name">Four Seasons Resort Palm Beach</div>
+          <div class="hotel-tagline">More intimate than The Breakers — 210 rooms, Michelin-starred dining from chef Mauro Colagreco, and a beach experience that feels genuinely private. Pastel-toned rooms with balconies, superb service, and the best beach setup in town.</div>
+          <div class="hotel-tags"><span class="tag">Michelin-Starred Dining</span><span class="tag">Beachfront</span><span class="tag">Intimate Scale</span><span class="tag">Fora Preferred</span></div>
+          <div class="advisor-note"><span class="advisor-note-icon">✦</span><span class="advisor-note-text">The Four Seasons is where I send couples and honeymooners. It has the warmth and scale that The Breakers, with its convention-center size, can't quite replicate.</span></div>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-img" style="background:linear-gradient(145deg,#f8e8c8,#e0b870)"></div>
+        <div class="hotel-body">
+          <div class="hotel-tier"><span class="hotel-tier-dot"></span> Iconic · Most Palm Beach</div>
+          <div class="hotel-name">The Colony Hotel Palm Beach</div>
+          <div class="hotel-tagline">Bubblegum pink, Worth Avenue adjacent, and dripping with old Palm Beach charm. The Colony's pool bar and Sunday brunch are two of the great social rituals of the season. See and be seen — this is how Palm Beach is supposed to feel.</div>
+          <div class="hotel-tags"><span class="tag">Worth Ave Adjacent</span><span class="tag">Iconic Pool</span><span class="tag">Sunday Brunch</span><span class="tag">Social Scene</span></div>
+          <div class="advisor-note"><span class="advisor-note-icon">✦</span><span class="advisor-note-text">Book a room that overlooks the pool. The Colony's social energy — families, divorcées, socialites, everyone in Lilly — is half the reason to come to Palm Beach.</span></div>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-img" style="background:linear-gradient(145deg,#f0e8e0,#c8a888)"></div>
+        <div class="hotel-body">
+          <div class="hotel-tier"><span class="hotel-tier-dot"></span> Boutique · Hidden Gem</div>
+          <div class="hotel-name">The Brazilian Court Hotel</div>
+          <div class="hotel-tagline">A 1926 courtyard hotel with a Mediterranean soul — and home to Café Boulud Palm Beach, Daniel Boulud's outpost that has become one of the best restaurants in Florida. Understated elegance in the heart of town.</div>
+          <div class="hotel-tags"><span class="tag">Café Boulud</span><span class="tag">Courtyard Setting</span><span class="tag">Historic 1926</span><span class="tag">Walk to Worth Ave</span></div>
+          <div class="advisor-note"><span class="advisor-note-icon">✦</span><span class="advisor-note-text">For guests who want the full Palm Beach experience without the resort-hotel scale — this is your answer. Café Boulud alone justifies a stay.</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-block" id="dining">
+    <span class="eyebrow">Restaurants & Dining</span>
+    <h2>The Palm Beach <em>table</em></h2>
+    <p class="section-intro">Palm Beach's dining scene has quietly become world-class — driven by season-long regulars with serious taste and chefs who've realized there's a discerning audience here year-round.</p>
+    <div class="rule"></div>
+    <div class="dining-grid">
+
+      <div class="dining-card">
+        <div class="dining-card-top"><div class="dining-name">Café Boulud Palm Beach</div><div class="dining-price">$$$$</div></div>
+        <div class="dining-loc">Brazilian Court Hotel · Downtown</div>
+        <div class="dining-desc">Daniel Boulud's Palm Beach outpost — refined French-American cuisine in a beautiful courtyard setting. Consistently the best fine dining in town and one of the top restaurants in Florida. Book well in advance during season.</div>
+        <div class="dining-must">→ <strong>Order:</strong> Seasonal French classics, the tasting menu, whatever the kitchen is proud of</div>
+      </div>
+
+      <div class="dining-card">
+        <div class="dining-card-top"><div class="dining-name">Flagler Steakhouse</div><div class="dining-price">$$$$</div></div>
+        <div class="dining-loc">The Breakers · Oceanfront</div>
+        <div class="dining-desc">The Breakers' signature steakhouse — rich, old-guard Palm Beach atmosphere with impeccable service and a wine list deep enough to get lost in. The room alone is worth the dinner.</div>
+        <div class="dining-must">→ <strong>Order:</strong> Dry-aged prime ribeye, the tableside Caesar, anything from the raw bar</div>
+      </div>
+
+      <div class="dining-card">
+        <div class="dining-card-top"><div class="dining-name">Ta-boo</div><div class="dining-price">$$$</div></div>
+        <div class="dining-loc">Worth Avenue · Downtown</div>
+        <div class="dining-desc">A Palm Beach institution since 1941 — dark wood, loyal regulars, and American classics that have barely changed. The kind of place where you eat lunch next to someone who's been coming for 40 years. Entirely unpretentious.</div>
+        <div class="dining-must">→ <strong>Order:</strong> Clam chowder, the Cobb salad, the Palm Beach burger</div>
+      </div>
+
+      <div class="dining-card">
+        <div class="dining-card-top"><div class="dining-name">Imoto</div><div class="dining-price">$$$</div></div>
+        <div class="dining-loc">The Breakers · Oceanfront</div>
+        <div class="dining-desc">The Breakers' Japanese restaurant — sushi, robata, and creative small plates in a sleek, sexy room that feels nothing like the rest of the resort. The best Japanese food between Miami and Nantucket.</div>
+        <div class="dining-must">→ <strong>Order:</strong> Wagyu gyoza, black cod miso, the omakase sashimi selection</div>
+      </div>
+
+      <div class="dining-card">
+        <div class="dining-card-top"><div class="dining-name">Sant Ambroeus</div><div class="dining-price">$$$</div></div>
+        <div class="dining-loc">Worth Avenue · Downtown</div>
+        <div class="dining-desc">The Milanese café beloved by fashion and art world regulars — perfect pasta, excellent espresso, and a room full of people who could be shopping on the Via Montenapoleone. The best people-watching lunch on Worth Avenue.</div>
+        <div class="dining-must">→ <strong>Order:</strong> Risotto Milanese, the pasta of the day, an Aperol spritz at the bar</div>
+      </div>
+
+      <div class="dining-card">
+        <div class="dining-card-top"><div class="dining-name">Buccan</div><div class="dining-price">$$$</div></div>
+        <div class="dining-loc">Hibiscus Avenue · Downtown</div>
+        <div class="dining-desc">The most creative small-plates restaurant in Palm Beach — chef Clay Conley has been quietly one of Florida's best for years. Buzzy, warm, and consistently delicious. The best casual-upscale dinner in town.</div>
+        <div class="dining-must">→ <strong>Order:</strong> Crispy cauliflower, wood-roasted oysters, the whole roasted fish</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-block" id="todo">
+    <span class="eyebrow">Things to Do</span>
+    <h2>Palm Beach, <em>properly done</em></h2>
+    <p class="section-intro">Palm Beach rewards those who know where to look. Beyond the beach and the shopping, there's a cultural life and a social rhythm that takes a few trips to fully understand.</p>
+    <div class="rule"></div>
+    <div class="todo-list">
+
+      <div class="todo-item"><div class="todo-num">01</div><div>
+        <div class="todo-name">Worth Avenue — A Morning Well Spent</div>
+        <div class="todo-desc">Rodeo Drive's East Coast rival — four blocks of designer boutiques, art galleries, and hidden courtyards called "vias" that wind behind the storefronts. Walk the entire length, duck into every via, and end at Sant Ambroeus for lunch. Don't rush this.</div>
+        <div class="todo-badge">🛍️ Morning Experience</div>
+      </div></div>
+
+      <div class="todo-item"><div class="todo-num">02</div><div>
+        <div class="todo-name">The Norton Museum of Art</div>
+        <div class="todo-desc">One of the finest regional art museums in America — Matisse, Picasso, Hopper, Warhol, and a stunning collection of Chinese art housed in a beautifully renovated building. Free on Saturday mornings. Essential Palm Beach culture.</div>
+        <div class="todo-badge">🎨 Cultural Experience</div>
+      </div></div>
+
+      <div class="todo-item"><div class="todo-num">03</div><div>
+        <div class="todo-name">The Lake Trail at Sunrise</div>
+        <div class="todo-desc">A paved trail running the length of Palm Beach island along Lake Worth — past the mansions, the private docks, and the most extraordinary real estate in Florida. Walk or rent a bike. Best before 8am when the light is golden and the street is empty.</div>
+        <div class="todo-badge">🌅 Morning Ritual</div>
+      </div></div>
+
+      <div class="todo-item"><div class="todo-num">04</div><div>
+        <div class="todo-name">Sunday Brunch at The Colony</div>
+        <div class="todo-desc">The Colony's Sunday poolside brunch is one of the great social rituals of the Palm Beach season — champagne, beautiful food, beautiful people, and that unmistakable pink backdrop. Reserve weeks ahead; it fills completely during season.</div>
+        <div class="todo-badge">🥂 Social Experience</div>
+      </div></div>
+
+      <div class="todo-item"><div class="todo-num">05</div><div>
+        <div class="todo-name">Deep-Sea Fishing Charter</div>
+        <div class="todo-desc">The Gulf Stream runs unusually close to shore at Palm Beach — some of the best bluewater fishing on the East Coast is just minutes offshore. Mahi, wahoo, sailfish, and marlin are all in season at different times. Half-day charters depart from Lake Worth Inlet.</div>
+        <div class="todo-badge">🎣 Half-Day Charter</div>
+      </div></div>
+
+      <div class="todo-item"><div class="todo-num">06</div><div>
+        <div class="todo-name">Flagler Museum (Whitehall)</div>
+        <div class="todo-desc">Henry Flagler's 1902 Beaux-Arts mansion — the man who literally built Florida's East Coast — is now a museum of extraordinary opulence. Gold leaf, marble, and a private railway car in the backyard. One of the finest Gilded Age homes in America.</div>
+        <div class="todo-badge">🏛️ Historic Experience</div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <div class="section-block" id="getting-there">
+    <span class="eyebrow">Getting There</span>
+    <h2>Arriving in <em>Palm Beach</em></h2>
+    <p class="section-intro">Palm Beach is served by three airports at varying distances — and the right choice depends on where you're coming from and where you're staying.</p>
+    <div class="rule"></div>
+    <div class="transport-grid">
+      <div class="transport-card"><div class="transport-icon">✈️</div><div class="transport-name">Palm Beach International (PBI)</div><div class="transport-desc">The closest airport — 10 minutes from the island. Served by American, Delta, JetBlue, and Southwest with direct routes from major Eastern hubs. The easy answer for most trips.</div><div class="transport-tip">Always check PBI first — the proximity to the island saves 45+ minutes versus FLL.</div></div>
+      <div class="transport-card"><div class="transport-icon">✈️</div><div class="transport-name">Fort Lauderdale (FLL)</div><div class="transport-desc">About 70 miles south and served by every major carrier including budget airlines. Worth considering for better flight options or lower fares — budget 60–75 minutes for the drive north to Palm Beach.</div><div class="transport-tip">Spirit and Frontier fly into FLL; if the fare gap is significant, the extra drive time is manageable.</div></div>
+      <div class="transport-card"><div class="transport-icon">🚗</div><div class="transport-name">Getting Around On-Island</div><div class="transport-desc">Palm Beach island is only 14 miles long and a mile wide — a car is useful but not always necessary for a hotel-based stay. The Breakers and Four Seasons both offer bikes. Worth Avenue is walkable from most properties.</div><div class="transport-tip">Valet parking at Worth Avenue restaurants is the Palm Beach way — embrace it.</div></div>
+      <div class="transport-card"><div class="transport-icon">🚘</div><div class="transport-name">Private Car Service</div><div class="transport-desc">For season travel — January through April — I recommend pre-booking a private car from the airport. Uber surge pricing at PBI during snowbird season is real and unpredictable. A flat-rate car is worth the peace of mind.</div><div class="transport-tip">I arrange car service for my clients — one less thing to manage on arrival day.</div></div>
+    </div>
+  </div>
+
+  <div class="guide-cta-block" id="guide">
+    <div>
+      <span class="guide-cta-eyebrow">✦ Prospect Travel · Palm Beach Guide</span>
+      <div class="guide-cta-title">The full Palm Beach <em>insider guide</em></div>
+      <div class="guide-cta-desc">Season timing, resort comparison, beach access secrets, Worth Avenue tips, and every reservation worth making — the complete guide lives on the journal.</div>
+    </div>
+    <a href="https://yoursubstack.substack.com" target="_blank" class="btn-accent-lg">Read the full guide ↗</a>
+  </div>
+
+  <div class="other-dest">
+    <div class="other-dest-title">Explore more <em>destinations</em></div>
+    <div class="other-dest-grid">
+      <div class="dest-pill-card"><div class="dest-pill-bg bg-nantucket"></div><div class="dest-pill-overlay"></div><div class="dest-pill-info"><div class="dest-pill-region">Massachusetts</div><div class="dest-pill-name">Nantucket</div></div></div>
+      <div class="dest-pill-card"><div class="dest-pill-bg bg-aspen"></div><div class="dest-pill-overlay"></div><div class="dest-pill-info"><div class="dest-pill-region">Colorado</div><div class="dest-pill-name">Aspen</div></div></div>
+      <div class="dest-pill-card"><div class="dest-pill-bg bg-telluride"></div><div class="dest-pill-overlay"></div><div class="dest-pill-info"><div class="dest-pill-region">Colorado</div><div class="dest-pill-name">Telluride</div></div></div>
+      <div class="dest-pill-card"><div class="dest-pill-bg bg-disney"></div><div class="dest-pill-overlay"></div><div class="dest-pill-info"><div class="dest-pill-region">The Magic</div><div class="dest-pill-name">Disney</div></div></div>
+    </div>
+  </div>
+
+</div>
+<div class="side-col">
+  <div class="sidebar-cta">
+    <div class="sidebar-cta-title">Plan your<br><em>Palm Beach trip</em><br>with me.</div>
+    <div class="sidebar-cta-desc">The right resort, the right tables, and every Worth Avenue detour — handled.</div>
+    <a href="index.html#contact" class="btn-accent">Start planning ✦</a>
+  </div>
+  <div class="sidebar-card">
+    <div class="sidebar-card-title">Advisor's Palm Beach tips</div>
+    <ul class="sidebar-list">
+      <li>Season runs January through April — rates and crowds peak in February and March. Book hotels and restaurants months ahead.</li>
+      <li>The Breakers is the full-resort experience; Four Seasons is more intimate. Both are excellent; the choice depends on your travel style.</li>
+      <li>Café Boulud is the best dinner reservation in town — book it the moment you confirm your trip dates.</li>
+      <li>Rent bikes from the hotel and ride the Lake Trail early morning — one of the most beautiful rides in Florida.</li>
+      <li>Pack smart-casual minimum for dinner everywhere on Worth Avenue. Palm Beach dresses for dinner.</li>
+      <li>Shoulder season (May, November) offers significantly lower rates with perfect weather and far less crowd.</li>
+    </ul>
+  </div>
+  <div class="sidebar-card">
+    <div class="sidebar-card-title">Best times to visit</div>
+    <ul class="sidebar-list">
+      <li><strong style="color:var(--ink)">January – March</strong> — Peak season, perfect weather, full social calendar</li>
+      <li><strong style="color:var(--ink)">November</strong> — Quiet, warm, and restaurants just reopening for season</li>
+      <li><strong style="color:var(--ink)">May</strong> — Lovely weather, very low crowds, great value</li>
+      <li><strong style="color:var(--ink)">Avoid:</strong> July–August — humid, hurricane season, many restaurants closed</li>
+    </ul>
+  </div>
+  <div class="sidebar-guide">
+    <span class="sidebar-guide-label">On the journal</span>
+    <div class="sidebar-guide-title">The complete<br><em>Palm Beach</em><br>season guide</div>
+    <a href="https://yoursubstack.substack.com" target="_blank" class="btn-outline-light">Read on Substack ↗</a>
+  </div>
+</div>
+</div></div>
+
+<footer><div class="footer-inner">
+  <div class="footer-logo">Prospect <em>Travel</em></div>
+  <ul class="footer-links-row"><li><a href="index.html#destinations">Destinations</a></li><li><a href="index.html#guides">Guides</a></li><li><a href="index.html#journal">Journal</a></li><li><a href="index.html#contact">Start Planning</a></li></ul>
+  <div class="footer-copy">© 2025 Prospect Travel · Fora Network</div>
+</div></footer>
+
+<script>
+const sections=document.querySelectorAll('.section-block');
+const tocLinks=document.querySelectorAll('.toc-link');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.toc-link[href="#${entry.target.id}"]`);if(a)a.classList.add('active')}})},{threshold:0.3,rootMargin:'-130px 0px -50% 0px'});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>

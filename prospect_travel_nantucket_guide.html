@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nantucket Guide — Prospect Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--off-white:#f7f4ef;--warm-white:#fdfbf8;--cream:#efe9df;--stone:#d4c9b8;--ink:#1c1917;--ink-mid:#44403c;--ink-light:#78716c;--ink-ghost:#a8a29e;--terra:#b5603f;--sand:#c4a97d;--sand-light:#e8dccb;--dest-dark:#0d2a4a;--dest-mid:#1a4a7a;--dest-accent:#c4a97d}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--ink);overflow-x:hidden;line-height:1.6}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2.5rem;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(253,251,248,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--stone)}
+.logo{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:400;color:var(--ink);text-decoration:none}
+.logo em{font-style:italic;color:var(--terra)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.8rem;color:var(--ink-mid);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink);color:#fff;padding:0.5rem 1.2rem;border-radius:100px;font-size:0.78rem;text-decoration:none;font-weight:500}
+.hero{padding-top:64px;min-height:78vh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#0d2a4a 0%,#1a4a7a 50%,#2a6aaa 100%)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,42,74,0.9) 0%,rgba(13,42,74,0.25) 55%,transparent 100%)}
+.hero-illus{position:absolute;right:5%;bottom:0;opacity:0.12;width:380px}
+.hero-content{position:relative;z-index:2;padding:4rem 4rem 4.5rem}
+.hero-breadcrumb{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem}
+.hero-breadcrumb a{font-size:0.74rem;color:rgba(255,255,255,0.45);text-decoration:none}
+.hero-breadcrumb a:hover{color:rgba(255,255,255,0.75)}
+.hero-breadcrumb span{font-size:0.7rem;color:rgba(255,255,255,0.3)}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(196,169,125,0.15);border:1px solid rgba(196,169,125,0.3);color:var(--dest-accent);font-size:0.72rem;padding:0.3rem 0.8rem;border-radius:100px;margin-bottom:1.2rem;letter-spacing:0.06em;text-transform:uppercase}
+.hero-tag span{width:5px;height:5px;border-radius:50%;background:var(--dest-accent);display:inline-block}
+h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:400;line-height:1.05;color:#fff;margin-bottom:1rem;max-width:700px}
+h1 em{font-style:italic;color:var(--dest-accent)}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,0.6);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:2rem}
+.hero-meta{display:flex;align-items:center;gap:2rem}
+.hero-meta-item{font-size:0.78rem;color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:0.4rem}
+.hero-meta-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.3)}
+.toc-bar{position:sticky;top:64px;z-index:90;background:var(--warm-white);border-bottom:1px solid var(--stone);padding:0 4rem}
+.toc-inner{display:flex;gap:0;overflow-x:auto}
+.toc-link{font-size:0.78rem;color:var(--ink-ghost);text-decoration:none;padding:1rem 1.25rem;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s}
+.toc-link:hover{color:var(--ink-mid);border-bottom-color:var(--stone)}
+.toc-link.active{color:var(--terra);border-bottom-color:var(--terra)}
+.page-body{max-width:1140px;margin:0 auto;padding:4rem 4rem 6rem}
+.two-col{display:grid;grid-template-columns:1fr 320px;gap:4rem;align-items:start}
+.side-col{position:sticky;top:130px}
+.section-block{margin-bottom:4rem;scroll-margin-top:130px}
+.eyebrow{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--terra);margin-bottom:0.6rem;display:block}
+h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:0.5rem}
+h2 em{font-style:italic}
+.section-intro{font-size:0.92rem;color:var(--ink-light);line-height:1.8;margin-bottom:2rem;max-width:620px;font-weight:300}
+.rule{height:1px;background:var(--stone);margin-bottom:2rem}
+.hotel-grid{display:flex;flex-direction:column;gap:1.25rem}
+.hotel-card{background:var(--off-white);border:1px solid var(--stone);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:180px 1fr;transition:box-shadow 0.3s}
+.hotel-card:hover{box-shadow:0 6px 28px rgba(28,25,23,0.08)}
+.hotel-img{position:relative;overflow:hidden;min-height:150px}
+.hotel-body{padding:1.25rem 1.4rem}
+.hotel-tier{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin-bottom:0.4rem}
+.hotel-tier-dot{width:4px;height:4px;border-radius:50%;background:var(--terra)}
+.hotel-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;color:var(--ink);margin-bottom:0.3rem}
+.hotel-tagline{font-size:0.82rem;color:var(--ink-light);line-height:1.6;margin-bottom:0.75rem}
+.hotel-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.tag{font-size:0.65rem;background:var(--cream);color:var(--ink-mid);padding:0.2rem 0.55rem;border-radius:100px;letter-spacing:0.04em}
+.advisor-note{background:rgba(13,42,74,0.05);border:1px solid rgba(13,42,74,0.1);border-radius:10px;padding:0.75rem 1rem;margin-top:0.75rem;display:flex;gap:0.6rem;align-items:flex-start}
+.advisor-note-icon{font-size:0.75rem;color:var(--dest-mid);flex-shrink:0;margin-top:1px}
+.advisor-note-text{font-size:0.75rem;color:var(--ink-mid);line-height:1.5;font-style:italic}
+.dining-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.dining-card{background:var(--off-white);border:1px solid var(--stone);border-radius:14px;padding:1.25rem 1.4rem;transition:transform 0.25s,box-shadow 0.25s}
+.dining-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(28,25,23,0.07)}
+.dining-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem}
+.dining-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:var(--ink);line-height:1.2}
+.dining-price{font-size:0.75rem;color:var(--ink-ghost);white-space:nowrap;margin-left:0.5rem}
+.dining-loc{font-size:0.7rem;color:var(--terra);margin-bottom:0.5rem;letter-spacing:0.04em}
+.dining-desc{font-size:0.8rem;color:var(--ink-light);line-height:1.6}
+.dining-must{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.6rem;font-size:0.68rem;color:var(--ink-ghost)}
+.dining-must strong{color:var(--ink-mid);font-weight:500}
+.todo-list{display:flex;flex-direction:column;gap:0}
+.todo-item{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--stone);align-items:start}
+.todo-item:last-child{border-bottom:none}
+.todo-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;color:var(--stone);line-height:1}
+.todo-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:0.25rem}
+.todo-desc{font-size:0.8rem;color:var(--ink-light);line-height:1.6}
+.todo-badge{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.4rem;font-size:0.65rem;color:var(--terra);background:rgba(181,96,63,0.08);padding:0.15rem 0.5rem;border-radius:100px;letter-spacing:0.04em}
+.transport-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.transport-card{background:var(--off-white);border:1px solid var(--stone);border-radius:14px;padding:1.25rem 1.4rem}
+.transport-icon{width:36px;height:36px;border-radius:10px;background:var(--cream);display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;font-size:1rem}
+.transport-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:0.3rem}
+.transport-desc{font-size:0.8rem;color:var(--ink-light);line-height:1.6}
+.transport-tip{font-size:0.73rem;color:var(--terra);margin-top:0.5rem;font-weight:500}
+.sidebar-card{background:var(--off-white);border:1px solid var(--stone);border-radius:16px;padding:1.5rem;margin-bottom:1.25rem}
+.sidebar-card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:1rem}
+.sidebar-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.sidebar-list li{font-size:0.8rem;color:var(--ink-mid);display:flex;align-items:flex-start;gap:0.5rem;line-height:1.5}
+.sidebar-list li::before{content:'✦';color:var(--terra);font-size:0.5rem;margin-top:0.3rem;flex-shrink:0}
+.sidebar-cta{background:var(--dest-dark);border-radius:16px;padding:1.75rem 1.5rem;text-align:center}
+.sidebar-cta-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:#fff;line-height:1.3;margin-bottom:0.6rem}
+.sidebar-cta-title em{font-style:italic;color:var(--dest-accent)}
+.sidebar-cta-desc{font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:1.25rem}
+.btn-accent{display:block;background:var(--dest-accent);color:var(--dest-dark);padding:0.7rem 1rem;border-radius:100px;font-size:0.8rem;font-weight:500;text-decoration:none;text-align:center}
+.sidebar-guide{background:var(--ink);border-radius:16px;padding:1.75rem 1.5rem;margin-top:1.25rem}
+.sidebar-guide-label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);margin-bottom:0.5rem;display:block}
+.sidebar-guide-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:#fff;line-height:1.35;margin-bottom:1rem}
+.sidebar-guide-title em{font-style:italic;color:var(--dest-accent)}
+.btn-outline-light{display:block;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.75);padding:0.65rem 1rem;border-radius:100px;font-size:0.78rem;text-decoration:none;text-align:center}
+.guide-cta-block{background:linear-gradient(135deg,var(--dest-dark),var(--dest-mid));border-radius:20px;padding:3rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;margin-top:3rem}
+.guide-cta-eyebrow{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(196,169,125,0.8);margin-bottom:0.5rem;display:block}
+.guide-cta-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;color:#fff;line-height:1.2;margin-bottom:0.5rem}
+.guide-cta-title em{font-style:italic;color:var(--dest-accent)}
+.guide-cta-desc{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7}
+.btn-accent-lg{display:inline-flex;align-items:center;gap:0.5rem;background:var(--dest-accent);color:var(--dest-dark);padding:0.85rem 1.75rem;border-radius:100px;font-size:0.85rem;font-weight:500;text-decoration:none;white-space:nowrap}
+.other-dest{margin-top:5rem;padding-top:3rem;border-top:1px solid var(--stone)}
+.other-dest-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:1.5rem}
+.other-dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.dest-pill-card{border-radius:14px;overflow:hidden;cursor:pointer;position:relative;height:140px;transition:transform 0.3s}
+.dest-pill-card:hover{transform:translateY(-3px)}
+.dest-pill-bg{position:absolute;inset:0}
+.dest-pill-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,0.72),transparent)}
+.dest-pill-info{position:absolute;bottom:0;left:0;right:0;padding:0.9rem 1rem}
+.dest-pill-region{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.15rem}
+.dest-pill-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:#fff}
+.bg-palmbeach{background:linear-gradient(145deg,#c8ddd0,#6a9a80)}
+.bg-aspen{background:linear-gradient(145deg,#dde4ec,#8fa5ba)}
+.bg-telluride{background:linear-gradient(145deg,#cfd8cc,#7a9478)}
+.bg-disney{background:linear-gradient(145deg,#ddd0e8,#9078b8)}
+.bg-nantucket{background:linear-gradient(145deg,#c8d8e8,#7898b8)}
+footer{background:#0e0c0b;padding:3rem 4rem 2rem}
+.footer-inner{display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1rem;color:#fff}
+.footer-logo em{font-style:italic;color:var(--terra)}
+.footer-links-row{display:flex;gap:2rem;list-style:none}
+.footer-links-row a{font-size:0.78rem;color:rgba(255,255,255,0.35);text-decoration:none}
+.footer-copy{font-size:0.7rem;color:rgba(255,255,255,0.2)}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">Prospect <em>Travel</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html#destinations">Destinations</a></li>
+    <li><a href="index.html#guides">Guides</a></li>
+    <li><a href="index.html#journal">Journal</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Start planning</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <svg class="hero-illus" viewBox="0 0 380 300" fill="none">
+    <path d="M0 200 Q80 175 160 200 Q240 225 320 200 Q355 188 380 200 L380 300 L0 300Z" fill="#c4a97d" opacity="0.6"/>
+    <path d="M0 225 Q100 205 200 225 Q300 245 380 225 L380 300 L0 300Z" fill="#c4a97d" opacity="0.35"/>
+    <rect x="170" y="80" width="40" height="110" fill="#f0ebe0"/>
+    <polygon points="148,90 190,38 232,90" fill="#c4a97d"/>
+    <rect x="158" y="130" width="64" height="10" fill="#c4a97d"/>
+    <rect x="178" y="95" width="24" height="24" fill="#c4a97d" rx="2"/>
+    <path d="M60 210 L60 162 L100 206Z" fill="#f0ebe0" opacity="0.55"/>
+    <path d="M280 205 L280 168 L310 202Z" fill="#f0ebe0" opacity="0.45"/>
+    <circle cx="300" cy="50" r="38" fill="#c4a97d" opacity="0.2"/>
+    <circle cx="80" cy="40" r="18" fill="#c4a97d" opacity="0.15"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-breadcrumb"><a href="index.html">Home</a><span>›</span><a href="index.html#destinations">Destinations</a><span>›</span><a href="#">Nantucket</a></div>
+    <div class="hero-tag"><span></span> Island Specialist · Prospect Travel</div>
+    <h1>Nantucket,<br><em>Massachusetts</em></h1>
+    <p class="hero-desc">Cobblestone streets, saltbox shingled cottages, world-class dining, and 82 miles of pristine coastline — all on an island 30 miles out to sea. The most storied summer address in New England.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">✦ 30 miles off Cape Cod</div>
+      <div class="hero-meta-dot"></div>
+      <div class="hero-meta-item">Peak Season: June – September</div>
+      <div class="hero-meta-dot"></div>
+      <div class="hero-meta-item">Ferry & Air Access</div>
+    </div>
+  </div>
+</section>
+
+<div class="toc-bar">
+  <div class="toc-inner">
+    <a href="#hotels" class="toc-link active">Where to Stay</a>
+    <a href="#dining" class="toc-link">Dining</a>
+    <a href="#todo" class="toc-link">Things to Do</a>
+    <a href="#getting-there" class="toc-link">Getting There</a>
+    <a href="#guide" class="toc-link">Full Guide ↗</a>
+  </div>
+</div>
+
+<div class="page-body">
+  <div class="two-col">
+    <div class="main-col">
+
+      <div class="section-block" id="hotels">
+        <span class="eyebrow">Where to Stay</span>
+        <h2>Stays worth <em>savoring</em></h2>
+        <p class="section-intro">Nantucket's best hotels book out months in advance — especially in July and August. These are the properties I return to again and again, each with a distinct character that makes the island feel like your own.</p>
+        <div class="rule"></div>
+        <div class="hotel-grid">
+
+          <div class="hotel-card">
+            <div class="hotel-img bg-nantucket" style="background:linear-gradient(145deg,#c8d8e8,#7898b8)"></div>
+            <div class="hotel-body">
+              <div class="hotel-tier"><span class="hotel-tier-dot"></span> Luxury · Top Pick</div>
+              <div class="hotel-name">White Elephant Hotel</div>
+              <div class="hotel-tagline">Nantucket's grande dame — a waterfront landmark with harbor views, a full-service spa, and dining that rivals anything on island. The cottages are perfection for families.</div>
+              <div class="hotel-tags"><span class="tag">Harbor Views</span><span class="tag">Full-Service Spa</span><span class="tag">Cottages Available</span><span class="tag">Fora Preferred</span></div>
+              <div class="advisor-note"><span class="advisor-note-icon">✦</span><span class="advisor-note-text">Ask for a harbor-facing room or cottage. The water views at sunrise make the premium worth every cent — and the hotel boat to the Wauwinet is one of the great Nantucket rituals.</span></div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <div class="hotel-img" style="background:linear-gradient(145deg,#dde8d0,#8aaa80)"></div>
+            <div class="hotel-body">
+              <div class="hotel-tier"><span class="hotel-tier-dot"></span> Relais & Châteaux · Most Romantic</div>
+              <div class="hotel-name">The Wauwinet</div>
+              <div class="hotel-tagline">At the far eastern tip of the island, Nantucket's only Relais & Châteaux property offers private ocean and bayside beaches, a legendary restaurant, and complete seclusion from the summer crowd.</div>
+              <div class="hotel-tags"><span class="tag">Private Beaches</span><span class="tag">Topper's Restaurant</span><span class="tag">Tennis</span><span class="tag">Relais & Châteaux</span></div>
+              <div class="advisor-note"><span class="advisor-note-icon">✦</span><span class="advisor-note-text">Watch the sunset from the Adirondack chairs on the lawn with a glass of something cold, then walk directly to dinner at Topper's. This is what Nantucket is supposed to feel like.</span></div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <div class="hotel-img" style="background:linear-gradient(145deg,#e8e0d0,#c0a880)"></div>
+            <div class="hotel-body">
+              <div class="hotel-tier"><span class="hotel-tier-dot"></span> Boutique · Best in Town</div>
+              <div class="hotel-name">Greydon House</div>
+              <div class="hotel-tagline">A beautifully restored sea captain's home steps from Main Street — Portuguese tiles, antique furnishings, and one of the island's best cocktail bars. Sophisticated, intimate, and impeccably run.</div>
+              <div class="hotel-tags"><span class="tag">Downtown Location</span><span class="tag">Acclaimed Restaurant</span><span class="tag">Cocktail Bar</span><span class="tag">18 Rooms</span></div>
+              <div class="advisor-note"><span class="advisor-note-icon">✦</span><span class="advisor-note-text">The restaurant at Greydon is genuinely excellent — make a reservation even if you're not staying here. The cocktail bar becomes the best place on the island after 10pm.</span></div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <div class="hotel-img" style="background:linear-gradient(145deg,#d8e0e8,#90a8c0)"></div>
+            <div class="hotel-body">
+              <div class="hotel-tier"><span class="hotel-tier-dot"></span> Waterfront · Best for Families</div>
+              <div class="hotel-name">The Cottages & Lofts at the Boat Basin</div>
+              <div class="hotel-tagline">Right on the harbor with private multi-room cottages — each with a living room, kitchen, and dock access. Walk to everything in town, then return to your own quiet waterfront retreat.</div>
+              <div class="hotel-tags"><span class="tag">Harbour Views</span><span class="tag">Full Kitchens</span><span class="tag">Dock Access</span><span class="tag">Pet Friendly</span></div>
+              <div class="advisor-note"><span class="advisor-note-icon">✦</span><span class="advisor-note-text">Ideal for families or groups — you get the independence of a cottage with the services of a hotel. Book the dock-facing units and bring your sea legs.</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="section-block" id="dining">
+        <span class="eyebrow">Restaurants & Dining</span>
+        <h2>Tables worth <em>the wait</em></h2>
+        <p class="section-intro">Nantucket punches well above its weight for a small island — driven by the quality of what comes off the boats each morning and a dining scene that has quietly become one of the best in New England.</p>
+        <div class="rule"></div>
+        <div class="dining-grid">
+
+          <div class="dining-card">
+            <div class="dining-card-top"><div class="dining-name">Topper's at The Wauwinet</div><div class="dining-price">$$$$</div></div>
+            <div class="dining-loc">Wauwinet · East of Town</div>
+            <div class="dining-desc">The island's most celebrated fine dining — prix-fixe and à la carte in an elegant setting overlooking the harbor. Arrive for the lawn cocktails, stay for the tasting menu. Book months in advance.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Topper's clam chowder, whatever the day boat caught</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top"><div class="dining-name">CRU Oyster Bar</div><div class="dining-price">$$$</div></div>
+            <div class="dining-loc">Straight Wharf · Waterfront</div>
+            <div class="dining-desc">The hardest reservation on the island — a French-Mediterranean raw bar and restaurant perched at the end of the wharf. The lobster roll is the best on island. Sells out for the entire month within a day of opening reservations.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Oysters, the CRU lobster roll, anything with the catch of the day</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top"><div class="dining-name">The Nautilus</div><div class="dining-price">$$$</div></div>
+            <div class="dining-loc">12 Cambridge Street · Downtown</div>
+            <div class="dining-desc">Asian-inspired small plates in a buzzy, clubby room — the crab fried rice and Peking duck are legendary. The hardest same-day reservation on island. Call at 2pm sharp; by 2:15 it's gone.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Blue crab fried rice, whole roast Peking duck, tempura oysters</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top"><div class="dining-name">Galley Beach</div><div class="dining-price">$$$</div></div>
+            <div class="dining-loc">Cliffside Beach · West of Town</div>
+            <div class="dining-desc">Tables literally on the sand, cocktails at sunset, and beautifully executed New American seafood. Request to sit outside and arrive early for drinks on the plush beach lounges — one of the great Nantucket rituals.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Scallops, the catch of the day, anything with a sunset</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top"><div class="dining-name">Proprietors Bar & Table</div><div class="dining-price">$$$</div></div>
+            <div class="dining-loc">Federal Street · Downtown</div>
+            <div class="dining-desc">Locally sourced, globally influenced — one of the most creative menus on the island in a relaxed, neighbourhood setting. The cocktail program is exceptional.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Whatever looks seasonal, the bartender's recommendation</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top"><div class="dining-name">Millie's</div><div class="dining-price">$$</div></div>
+            <div class="dining-loc">Madaket Beach · West End</div>
+            <div class="dining-desc">Baja-style fish tacos, lobster quesadillas, and the infamous Madaket Mystery cocktail — right on the beach. Walk down to catch the sunset while you wait for your table. The most fun you'll have eating on the island.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Fish tacos, the Madaket Mystery, lobster quesadilla</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="section-block" id="todo">
+        <span class="eyebrow">Things to Do</span>
+        <h2>The island, <em>properly</em></h2>
+        <p class="section-intro">Nantucket rewards those who slow down. There's no rush here — the island runs on its own clock, and the best experiences come from knowing where to be at the right moment.</p>
+        <div class="rule"></div>
+        <div class="todo-list">
+
+          <div class="todo-item">
+            <div class="todo-num">01</div>
+            <div>
+              <div class="todo-name">Walk Cobblestone Main Street at Dawn</div>
+              <div class="todo-desc">Before the summer crowd arrives, Nantucket's historic downtown is utterly peaceful. The whaling-era architecture, the antique shops still shuttered, the scent of coffee from the bakeries opening — it's the island at its most authentic. Worth an early alarm.</div>
+              <div class="todo-badge">🌅 Morning Experience</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">02</div>
+            <div>
+              <div class="todo-name">Rent Bikes to 'Sconset</div>
+              <div class="todo-desc">The 8-mile bike path from town to the village of Siasconset — rose-covered cottages, a bluff with Atlantic views, and a tiny market for sandwiches — is the quintessential Nantucket afternoon. Go early, have lunch, cycle back in time for sunset.</div>
+              <div class="todo-badge">🚲 Half-Day Adventure</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">03</div>
+            <div>
+              <div class="todo-name">Sail from Nantucket Town</div>
+              <div class="todo-desc">Charter a sailboat for a sunset cruise around the harbor — or a full-day trip to the outer islands. Several excellent operators run both private and group charters. This is why people come to Nantucket. Get on the water.</div>
+              <div class="todo-badge">⛵ Charter Available</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">04</div>
+            <div>
+              <div class="todo-name">Nantucket Whaling Museum</div>
+              <div class="todo-desc">One of the finest maritime museums in America, housed in a former spermaceti candle factory. The 46-foot sperm whale skeleton is extraordinary. Genuinely fascinating for adults and children alike — allow two hours.</div>
+              <div class="todo-badge">🐋 Cultural Experience</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">05</div>
+            <div>
+              <div class="todo-name">Madaket Beach at Sunset</div>
+              <div class="todo-desc">The far western tip of the island, where the sun drops into the water — one of the few places on the East Coast with a true western-facing sunset over the ocean. Bring a drink, a blanket, and nothing else. Arrive 30 minutes early.</div>
+              <div class="todo-badge">🌅 Sunset Ritual</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">06</div>
+            <div>
+              <div class="todo-name">Great Point Lighthouse by 4WD</div>
+              <div class="todo-desc">The undeveloped northern tip of the island — accessible only by 4WD over sand — with a lighthouse, seals in the water, and complete solitude. Rent a permit-equipped Jeep and make a morning of it. One of the most beautiful spots in New England.</div>
+              <div class="todo-badge">🚙 4WD Required</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="section-block" id="getting-there">
+        <span class="eyebrow">Getting There</span>
+        <h2>Reaching the <em>island</em></h2>
+        <p class="section-intro">Nantucket is 30 miles offshore — and the journey is part of the experience. There are two good ways in: ferry from Hyannis or direct flight. Both have their advocates.</p>
+        <div class="rule"></div>
+        <div class="transport-grid">
+          <div class="transport-card">
+            <div class="transport-icon">⛴️</div>
+            <div class="transport-name">High-Speed Ferry</div>
+            <div class="transport-desc">The Steamship Authority and Hy-Line Cruises both run high-speed passenger ferries from Hyannis, MA — about 1 hour each way. Book in advance for peak summer departures. The slow car ferry (2.25 hrs) is how you bring a vehicle.</div>
+            <div class="transport-tip">High-speed ferry is the classic Nantucket arrival. There's nothing like pulling into the harbor for the first time.</div>
+          </div>
+          <div class="transport-card">
+            <div class="transport-icon">✈️</div>
+            <div class="transport-name">Direct Flights</div>
+            <div class="transport-desc">Cape Air, JetBlue, and American connect Nantucket (ACK) to Boston, New York, and Philadelphia. Cape Air's small props from Boston take 35 minutes. Summer routes fill fast — book well ahead.</div>
+            <div class="transport-tip">Flying in gives you spectacular aerial views of the island on approach. Worth it at least once.</div>
+          </div>
+          <div class="transport-card">
+            <div class="transport-icon">🚗</div>
+            <div class="transport-name">Getting Around on Island</div>
+            <div class="transport-desc">You don't need a car for a town-based stay — the island is entirely walkable or bikeable. If you're venturing to the outer beaches or Great Point, you'll want a 4WD vehicle rental. Taxis and rideshares are limited; plan ahead.</div>
+            <div class="transport-tip">The NRTA shuttle covers most of the island for $2 a ride — a secret weapon in peak season.</div>
+          </div>
+          <div class="transport-card">
+            <div class="transport-icon">🚌</div>
+            <div class="transport-name">Car Ferry (Vehicles)</div>
+            <div class="transport-desc">The slow Steamship Authority ferry from Hyannis takes cars (2.25 hrs). Reservations open months in advance and are essential in summer — missing your slot means missing the day. Book the moment reservations open.</div>
+            <div class="transport-tip">Honestly? Leave the car in Hyannis. Bikes and taxis are more than enough for most Nantucket trips.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-cta-block" id="guide">
+        <div>
+          <span class="guide-cta-eyebrow">✦ Prospect Travel · Nantucket Guide</span>
+          <div class="guide-cta-title">The full insider's <em>deep dive</em></div>
+          <div class="guide-cta-desc">The complete Prospect Travel Nantucket guide — packing lists, beach rankings, ferry booking tips, what to skip, and every reservation worth making — lives on the journal.</div>
+        </div>
+        <a href="https://yoursubstack.substack.com" target="_blank" class="btn-accent-lg">Read the full guide ↗</a>
+      </div>
+
+      <div class="other-dest">
+        <div class="other-dest-title">Explore more <em>destinations</em></div>
+        <div class="other-dest-grid">
+          <div class="dest-pill-card"><div class="dest-pill-bg bg-palmbeach"></div><div class="dest-pill-overlay"></div><div class="dest-pill-info"><div class="dest-pill-region">Florida</div><div class="dest-pill-name">Palm Beach</div></div></div>
+          <div class="dest-pill-card"><div class="dest-pill-bg bg-aspen"></div><div class="dest-pill-overlay"></div><div class="dest-pill-info"><div class="dest-pill-region">Colorado</div><div class="dest-pill-name">Aspen</div></div></div>
+          <div class="dest-pill-card"><div class="dest-pill-bg bg-telluride"></div><div class="dest-pill-overlay"></div><div class="dest-pill-info"><div class="dest-pill-region">Colorado</div><div class="dest-pill-name">Telluride</div></div></div>
+          <div class="dest-pill-card"><div class="dest-pill-bg bg-disney"></div><div class="dest-pill-overlay"></div><div class="dest-pill-info"><div class="dest-pill-region">The Magic</div><div class="dest-pill-name">Disney</div></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="side-col">
+      <div class="sidebar-cta">
+        <div class="sidebar-cta-title">Plan your<br><em>Nantucket trip</em><br>with me.</div>
+        <div class="sidebar-cta-desc">Ferries, restaurants, bikes, beaches — I handle every detail so you arrive ready to exhale.</div>
+        <a href="index.html#contact" class="btn-accent">Start planning ✦</a>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Advisor's Nantucket tips</div>
+        <ul class="sidebar-list">
+          <li>Book ferry reservations the moment they open — Steamship Authority summer slots vanish within hours.</li>
+          <li>CRU reservations open for a full month at once. Set a reminder and be online at the stroke of midnight.</li>
+          <li>Bring a light rain jacket — the island creates its own weather and afternoon fog can roll in fast.</li>
+          <li>Rent bikes from Young's Bicycle Shop on Broad Street — they've been doing it since 1931 and know the island cold.</li>
+          <li>The shoulder season (late May and early October) offers the best combination of lower crowds and lovely weather.</li>
+          <li>Don't try to drive everywhere — the island is meant to be walked and biked. Leave the car mentality at home.</li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Best times to visit</div>
+        <ul class="sidebar-list">
+          <li><strong style="color:var(--ink)">Late June</strong> — Long days, warm water, before peak crowds arrive</li>
+          <li><strong style="color:var(--ink)">Early September</strong> — Summer lingers, crowds thin, restaurants still fully open</li>
+          <li><strong style="color:var(--ink)">Christmas Stroll (December)</strong> — The island's most magical weekend of the year</li>
+          <li><strong style="color:var(--ink)">Avoid:</strong> July 4th week and last two weeks of July — peak crowds and prices</li>
+        </ul>
+      </div>
+      <div class="sidebar-guide">
+        <span class="sidebar-guide-label">On the journal</span>
+        <div class="sidebar-guide-title">The complete<br><em>Nantucket</em><br>insider guide</div>
+        <a href="https://yoursubstack.substack.com" target="_blank" class="btn-outline-light">Read on Substack ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Prospect <em>Travel</em></div>
+    <ul class="footer-links-row"><li><a href="index.html#destinations">Destinations</a></li><li><a href="index.html#guides">Guides</a></li><li><a href="index.html#journal">Journal</a></li><li><a href="index.html#contact">Start Planning</a></li></ul>
+    <div class="footer-copy">© 2025 Prospect Travel · Fora Network</div>
+  </div>
+</footer>
+
+<script>
+const sections=document.querySelectorAll('.section-block');
+const tocLinks=document.querySelectorAll('.toc-link');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.toc-link[href="#${entry.target.id}"]`);if(a)a.classList.add('active')}})},{threshold:0.3,rootMargin:'-130px 0px -50% 0px'});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>

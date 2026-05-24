@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Walt Disney World Guide — Prospect Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --off-white:#f7f4ef;
+  --warm-white:#fdfbf8;
+  --cream:#efe9df;
+  --stone:#d4c9b8;
+  --ink:#1c1917;
+  --ink-mid:#44403c;
+  --ink-light:#78716c;
+  --ink-ghost:#a8a29e;
+  --terra:#b5603f;
+  --sand:#c4a97d;
+  --sand-light:#e8dccb;
+  --disney-violet:#3d2068;
+  --disney-gold:#f0c040;
+  --disney-rose:#c8607a;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--ink);overflow-x:hidden;line-height:1.6}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2.5rem;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(253,251,248,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--stone)}
+.logo{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:400;color:var(--ink);text-decoration:none;letter-spacing:0.02em}
+.logo em{font-style:italic;color:var(--terra)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.8rem;color:var(--ink-mid);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink);color:#fff;padding:0.5rem 1.2rem;border-radius:100px;font-size:0.78rem;text-decoration:none;font-weight:500;transition:background 0.2s}
+.nav-cta:hover{background:var(--terra)}
+
+/* HERO */
+.hero{padding-top:64px;min-height:82vh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:var(--disney-violet)}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#1a0a35 0%,#3d2068 45%,#5a3490 100%)}
+.hero-stars{position:absolute;inset:0}
+.hero-star{position:absolute;background:#fff;border-radius:50%;animation:twinkle 3s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:0.08}to{opacity:0.7}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,10,53,0.92) 0%,rgba(26,10,53,0.3) 55%,transparent 100%)}
+
+/* Castle SVG */
+.hero-castle{position:absolute;bottom:0;right:6%;opacity:0.13;width:360px}
+
+.hero-content{position:relative;z-index:2;padding:4rem 4rem 4.5rem}
+.hero-breadcrumb{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem}
+.hero-breadcrumb a{font-size:0.74rem;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s}
+.hero-breadcrumb a:hover{color:rgba(255,255,255,0.75)}
+.hero-breadcrumb span{font-size:0.7rem;color:rgba(255,255,255,0.3)}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(240,192,64,0.15);border:1px solid rgba(240,192,64,0.3);color:var(--disney-gold);font-size:0.72rem;padding:0.3rem 0.8rem;border-radius:100px;margin-bottom:1.2rem;letter-spacing:0.06em;text-transform:uppercase}
+.hero-tag span{width:5px;height:5px;border-radius:50%;background:var(--disney-gold);display:inline-block}
+h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:400;line-height:1.05;color:#fff;margin-bottom:1rem;max-width:700px}
+h1 em{font-style:italic;color:var(--disney-gold)}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,0.6);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:2rem}
+.hero-meta{display:flex;align-items:center;gap:2rem}
+.hero-meta-item{font-size:0.78rem;color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:0.4rem}
+.hero-meta-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.3)}
+
+/* STICKY TOC */
+.toc-bar{position:sticky;top:64px;z-index:90;background:var(--warm-white);border-bottom:1px solid var(--stone);padding:0 4rem}
+.toc-inner{display:flex;gap:0;overflow-x:auto}
+.toc-link{font-size:0.78rem;color:var(--ink-ghost);text-decoration:none;padding:1rem 1.25rem;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.2s;letter-spacing:0.02em}
+.toc-link:hover{color:var(--ink-mid);border-bottom-color:var(--stone)}
+.toc-link.active{color:var(--terra);border-bottom-color:var(--terra)}
+
+/* LAYOUT */
+.page-body{max-width:1140px;margin:0 auto;padding:4rem 4rem 6rem}
+.two-col{display:grid;grid-template-columns:1fr 320px;gap:4rem;align-items:start}
+.main-col{}
+.side-col{position:sticky;top:130px}
+
+/* SECTION HEADERS */
+.section-block{margin-bottom:4rem;scroll-margin-top:130px}
+.eyebrow{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--terra);margin-bottom:0.6rem;display:block}
+h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:0.5rem}
+h2 em{font-style:italic}
+.section-intro{font-size:0.92rem;color:var(--ink-light);line-height:1.8;margin-bottom:2rem;max-width:620px;font-weight:300}
+.rule{height:1px;background:var(--stone);margin-bottom:2rem}
+
+/* HOTEL CARDS */
+.hotel-grid{display:flex;flex-direction:column;gap:1.25rem}
+.hotel-card{background:var(--off-white);border:1px solid var(--stone);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:180px 1fr;transition:box-shadow 0.3s}
+.hotel-card:hover{box-shadow:0 6px 28px rgba(28,25,23,0.08)}
+.hotel-img{position:relative;overflow:hidden}
+.hotel-img-inner{width:100%;height:100%;min-height:150px}
+.hotel-body{padding:1.25rem 1.4rem}
+.hotel-tier{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin-bottom:0.4rem}
+.hotel-tier-dot{width:4px;height:4px;border-radius:50%;background:var(--terra)}
+.hotel-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;color:var(--ink);margin-bottom:0.3rem}
+.hotel-tagline{font-size:0.82rem;color:var(--ink-light);line-height:1.6;margin-bottom:0.75rem}
+.hotel-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.tag{font-size:0.65rem;background:var(--cream);color:var(--ink-mid);padding:0.2rem 0.55rem;border-radius:100px;letter-spacing:0.04em}
+.advisor-note{background:linear-gradient(135deg,rgba(61,32,104,0.06),rgba(61,32,104,0.02));border:1px solid rgba(61,32,104,0.12);border-radius:10px;padding:0.75rem 1rem;margin-top:0.75rem;display:flex;gap:0.6rem;align-items:flex-start}
+.advisor-note-icon{font-size:0.75rem;color:var(--disney-violet);flex-shrink:0;margin-top:1px}
+.advisor-note-text{font-size:0.75rem;color:var(--ink-mid);line-height:1.5;font-style:italic}
+
+/* DINING CARDS */
+.dining-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.dining-card{background:var(--off-white);border:1px solid var(--stone);border-radius:14px;padding:1.25rem 1.4rem;transition:transform 0.25s,box-shadow 0.25s;cursor:default}
+.dining-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(28,25,23,0.07)}
+.dining-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem}
+.dining-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:var(--ink);line-height:1.2}
+.dining-price{font-size:0.75rem;color:var(--ink-ghost);white-space:nowrap;margin-left:0.5rem}
+.dining-loc{font-size:0.7rem;color:var(--terra);margin-bottom:0.5rem;letter-spacing:0.04em}
+.dining-desc{font-size:0.8rem;color:var(--ink-light);line-height:1.6}
+.dining-must{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.6rem;font-size:0.68rem;color:var(--ink-ghost)}
+.dining-must strong{color:var(--ink-mid);font-weight:500}
+
+/* THINGS TO DO */
+.todo-list{display:flex;flex-direction:column;gap:0}
+.todo-item{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--stone);align-items:start}
+.todo-item:last-child{border-bottom:none}
+.todo-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;color:var(--stone);line-height:1}
+.todo-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:0.25rem}
+.todo-desc{font-size:0.8rem;color:var(--ink-light);line-height:1.6}
+.todo-badge{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.4rem;font-size:0.65rem;color:var(--terra);background:rgba(181,96,63,0.08);padding:0.15rem 0.5rem;border-radius:100px;letter-spacing:0.04em}
+
+/* GETTING THERE */
+.transport-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.transport-card{background:var(--off-white);border:1px solid var(--stone);border-radius:14px;padding:1.25rem 1.4rem}
+.transport-icon{width:36px;height:36px;border-radius:10px;background:var(--cream);display:flex;align-items:center;justify-content:center;margin-bottom:0.75rem;font-size:1rem}
+.transport-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:0.3rem}
+.transport-desc{font-size:0.8rem;color:var(--ink-light);line-height:1.6}
+.transport-tip{font-size:0.73rem;color:var(--terra);margin-top:0.5rem;font-weight:500}
+
+/* SIDEBAR */
+.sidebar-card{background:var(--off-white);border:1px solid var(--stone);border-radius:16px;padding:1.5rem;margin-bottom:1.25rem}
+.sidebar-card-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:1rem}
+.sidebar-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.sidebar-list li{font-size:0.8rem;color:var(--ink-mid);display:flex;align-items:flex-start;gap:0.5rem;line-height:1.5}
+.sidebar-list li::before{content:'✦';color:var(--terra);font-size:0.5rem;margin-top:0.3rem;flex-shrink:0}
+.sidebar-cta{background:var(--disney-violet);border-radius:16px;padding:1.75rem 1.5rem;text-align:center}
+.sidebar-cta-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:#fff;line-height:1.3;margin-bottom:0.6rem}
+.sidebar-cta-title em{font-style:italic;color:var(--disney-gold)}
+.sidebar-cta-desc{font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:1.25rem}
+.btn-gold{display:block;background:var(--disney-gold);color:var(--disney-violet);padding:0.7rem 1rem;border-radius:100px;font-size:0.8rem;font-weight:500;text-decoration:none;text-align:center;transition:background 0.2s}
+.btn-gold:hover{background:#fff}
+.sidebar-guide{background:var(--ink);border-radius:16px;padding:1.75rem 1.5rem}
+.sidebar-guide-label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);margin-bottom:0.5rem;display:block}
+.sidebar-guide-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:#fff;line-height:1.35;margin-bottom:1rem}
+.sidebar-guide-title em{font-style:italic;color:var(--disney-gold)}
+.btn-outline-light{display:block;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.75);padding:0.65rem 1rem;border-radius:100px;font-size:0.78rem;text-decoration:none;text-align:center;transition:all 0.2s}
+.btn-outline-light:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.5)}
+
+/* FULL GUIDE CTA */
+.guide-cta-block{background:linear-gradient(135deg,#1a0a35,#3d2068);border-radius:20px;padding:3rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;margin-top:3rem}
+.guide-cta-eyebrow{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(240,192,64,0.7);margin-bottom:0.5rem;display:block}
+.guide-cta-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;color:#fff;line-height:1.2;margin-bottom:0.5rem}
+.guide-cta-title em{font-style:italic;color:var(--disney-gold)}
+.guide-cta-desc{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7}
+.btn-gold-lg{display:inline-flex;align-items:center;gap:0.5rem;background:var(--disney-gold);color:var(--disney-violet);padding:0.85rem 1.75rem;border-radius:100px;font-size:0.85rem;font-weight:500;text-decoration:none;white-space:nowrap;transition:background 0.2s}
+.btn-gold-lg:hover{background:#fff}
+
+/* OTHER DESTINATIONS */
+.other-dest{margin-top:5rem;padding-top:3rem;border-top:1px solid var(--stone)}
+.other-dest-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:1.5rem}
+.other-dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.dest-pill-card{border-radius:14px;overflow:hidden;cursor:pointer;position:relative;height:140px;transition:transform 0.3s}
+.dest-pill-card:hover{transform:translateY(-3px)}
+.dest-pill-bg{position:absolute;inset:0}
+.dest-pill-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,25,23,0.72),transparent)}
+.dest-pill-info{position:absolute;bottom:0;left:0;right:0;padding:0.9rem 1rem}
+.dest-pill-region{font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.15rem}
+.dest-pill-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:#fff}
+
+/* BG CLASSES */
+.bg-nantucket{background:linear-gradient(145deg,#c8d8e8,#7898b8)}
+.bg-palmbeach{background:linear-gradient(145deg,#c8ddd0,#6a9a80)}
+.bg-aspen{background:linear-gradient(145deg,#dde4ec,#8fa5ba)}
+.bg-telluride{background:linear-gradient(145deg,#cfd8cc,#7a9478)}
+.bg-disney-card{background:linear-gradient(145deg,#ddd0e8,#9078b8)}
+
+/* FOOTER */
+footer{background:#0e0c0b;padding:3rem 4rem 2rem}
+.footer-inner{display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1rem;color:#fff}
+.footer-logo em{font-style:italic;color:var(--terra)}
+.footer-links-row{display:flex;gap:2rem;list-style:none}
+.footer-links-row a{font-size:0.78rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s}
+.footer-links-row a:hover{color:rgba(255,255,255,0.7)}
+.footer-copy{font-size:0.7rem;color:rgba(255,255,255,0.2)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Prospect <em>Travel</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html#destinations">Destinations</a></li>
+    <li><a href="index.html#disney">Disney</a></li>
+    <li><a href="index.html#guides">Guides</a></li>
+    <li><a href="index.html#journal">Journal</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Start planning</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stars" id="stars"></div>
+  <div class="hero-overlay"></div>
+
+  <!-- Castle illustration -->
+  <svg class="hero-castle" viewBox="0 0 340 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="80" y="310" width="180" height="160" fill="#fff"/>
+    <path d="M140 470 L140 370 Q170 348 200 370 L200 470Z" fill="#3d2068"/>
+    <rect x="100" y="335" width="28" height="42" rx="14" fill="#f0c040" opacity="0.9"/>
+    <rect x="212" y="335" width="28" height="42" rx="14" fill="#f0c040" opacity="0.9"/>
+    <rect x="80" y="300" width="22" height="16" fill="#fff"/>
+    <rect x="110" y="300" width="22" height="16" fill="#fff"/>
+    <rect x="140" y="300" width="22" height="16" fill="#fff"/>
+    <rect x="170" y="300" width="22" height="16" fill="#fff"/>
+    <rect x="200" y="300" width="22" height="16" fill="#fff"/>
+    <rect x="230" y="300" width="22" height="16" fill="#fff"/>
+    <rect x="48" y="255" width="64" height="215" fill="#e8e0f0"/>
+    <rect x="48" y="244" width="64" height="16" fill="#c8b8e0"/>
+    <rect x="63" y="278" width="22" height="34" rx="11" fill="#f0c040" opacity="0.85"/>
+    <rect x="63" y="328" width="22" height="34" rx="11" fill="#f0c040" opacity="0.65"/>
+    <polygon points="80,244 80,128 114,244" fill="#c8607a"/>
+    <polygon points="80,244 46,244 80,128" fill="#a03050"/>
+    <circle cx="80" cy="126" r="7" fill="#f0c040"/>
+    <rect x="228" y="255" width="64" height="215" fill="#e8e0f0"/>
+    <rect x="228" y="244" width="64" height="16" fill="#c8b8e0"/>
+    <rect x="255" y="278" width="22" height="34" rx="11" fill="#f0c040" opacity="0.85"/>
+    <rect x="255" y="328" width="22" height="34" rx="11" fill="#f0c040" opacity="0.65"/>
+    <polygon points="260,244 260,128 294,244" fill="#c8607a"/>
+    <polygon points="260,244 226,244 260,128" fill="#a03050"/>
+    <circle cx="260" cy="126" r="7" fill="#f0c040"/>
+    <rect x="118" y="168" width="104" height="148" fill="#ede5f8"/>
+    <rect x="118" y="157" width="104" height="17" fill="#c8b8e0"/>
+    <rect x="148" y="186" width="44" height="64" rx="22" fill="#f0c040" opacity="0.85"/>
+    <polygon points="170,157 170,38 204,157" fill="#c8607a"/>
+    <polygon points="170,157 136,157 170,38" fill="#a03050"/>
+    <circle cx="170" cy="36" r="9" fill="#f0c040"/>
+    <line x1="170" y1="8" x2="170" y2="26" stroke="#f0c040" stroke-width="2.5"/>
+    <polygon points="128,168 128,103 148,168" fill="#c8607a" opacity="0.9"/>
+    <circle cx="128" cy="101" r="5" fill="#f0c040" opacity="0.85"/>
+    <polygon points="212,168 212,103 192,168" fill="#c8607a" opacity="0.9"/>
+    <circle cx="212" cy="101" r="5" fill="#f0c040" opacity="0.85"/>
+    <ellipse cx="170" cy="469" rx="110" ry="9" fill="#f0c040" opacity="0.1"/>
+    <circle cx="55" cy="50" r="3" fill="#f0c040" opacity="0.7"/>
+    <circle cx="290" cy="35" r="3" fill="#f0c040" opacity="0.7"/>
+    <circle cx="310" cy="90" r="2" fill="#f0c040" opacity="0.55"/>
+    <circle cx="30" cy="110" r="2" fill="#f0c040" opacity="0.55"/>
+    <line x1="55" y1="44" x2="55" y2="56" stroke="#f0c040" stroke-width="1.5" opacity="0.6"/>
+    <line x1="49" y1="50" x2="61" y2="50" stroke="#f0c040" stroke-width="1.5" opacity="0.6"/>
+    <line x1="290" y1="29" x2="290" y2="41" stroke="#f0c040" stroke-width="1.5" opacity="0.6"/>
+    <line x1="284" y1="35" x2="296" y2="35" stroke="#f0c040" stroke-width="1.5" opacity="0.6"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <a href="index.html#destinations">Destinations</a>
+      <span>›</span>
+      <a href="#">Walt Disney World</a>
+    </div>
+    <div class="hero-tag"><span></span> Disney Specialist · Prospect Travel</div>
+    <h1>Walt Disney<br><em>World</em></h1>
+    <p class="hero-desc">Four theme parks, two water parks, dozens of resorts, and more dining reservations than you can count — planned perfectly, so your family only has to show up.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">✦ Orlando, Florida</div>
+      <div class="hero-meta-dot"></div>
+      <div class="hero-meta-item">Year-round destination</div>
+      <div class="hero-meta-dot"></div>
+      <div class="hero-meta-item">4 Parks · 2 Water Parks</div>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY TOC -->
+<div class="toc-bar">
+  <div class="toc-inner">
+    <a href="#hotels" class="toc-link active">Where to Stay</a>
+    <a href="#dining" class="toc-link">Dining</a>
+    <a href="#todo" class="toc-link">Things to Do</a>
+    <a href="#getting-there" class="toc-link">Getting There</a>
+    <a href="#guide" class="toc-link">Full Guide ↗</a>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+  <div class="two-col">
+
+    <!-- MAIN -->
+    <div class="main-col">
+
+      <!-- HOTELS -->
+      <div class="section-block" id="hotels">
+        <span class="eyebrow">Where to Stay</span>
+        <h2>Resorts worth <em>every dollar</em></h2>
+        <p class="section-intro">Staying on property is the single biggest advantage at Walt Disney World — early park entry, free transportation, and the ability to book dining 60 days out. Here's where I'd put my own family.</p>
+        <div class="rule"></div>
+
+        <div class="hotel-grid">
+
+          <div class="hotel-card">
+            <div class="hotel-img bg-disney-card" style="background:linear-gradient(145deg,#e8e0f0,#c0a8d8)">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0.35">
+                <svg viewBox="0 0 100 80" width="70" fill="none">
+                  <rect x="20" y="30" width="60" height="45" fill="#fff"/>
+                  <polygon points="50,30 20,50 80,50" fill="#c4a97d"/>
+                  <rect x="38" y="48" width="24" height="27" fill="#3d2068" opacity="0.5"/>
+                  <rect x="25" y="35" width="14" height="20" rx="7" fill="#f0c040" opacity="0.8"/>
+                  <rect x="61" y="35" width="14" height="20" rx="7" fill="#f0c040" opacity="0.8"/>
+                </svg>
+              </div>
+            </div>
+            <div class="hotel-body">
+              <div class="hotel-tier"><span class="hotel-tier-dot"></span> Deluxe · Top Pick</div>
+              <div class="hotel-name">Grand Floridian Resort & Spa</div>
+              <div class="hotel-tagline">Disney's flagship Victorian resort on the Magic Kingdom monorail — the closest you'll get to staying inside the fairy tale itself.</div>
+              <div class="hotel-tags">
+                <span class="tag">Monorail Access</span>
+                <span class="tag">Victoria's & Albert's</span>
+                <span class="tag">Spa</span>
+                <span class="tag">Concierge Level</span>
+              </div>
+              <div class="advisor-note">
+                <span class="advisor-note-icon">✦</span>
+                <span class="advisor-note-text">Request a Magic Kingdom view room — watching the fireworks from your balcony is genuinely one of the most magical experiences on property.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <div class="hotel-img" style="background:linear-gradient(145deg,#dde8f0,#8fb8d0)">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0.35">
+                <svg viewBox="0 0 100 80" width="70" fill="none">
+                  <rect x="15" y="35" width="70" height="40" fill="#fff"/>
+                  <rect x="35" y="20" width="30" height="60" fill="#e0eef8"/>
+                  <rect x="42" y="30" width="16" height="22" rx="8" fill="#c4a97d" opacity="0.8"/>
+                  <path d="M10 52 Q30 45 50 52 Q70 59 90 52 L90 75 L10 75Z" fill="#7898b8" opacity="0.4"/>
+                </svg>
+              </div>
+            </div>
+            <div class="hotel-body">
+              <div class="hotel-tier"><span class="hotel-tier-dot"></span> Deluxe · Best for Families</div>
+              <div class="hotel-name">Disney's Beach Club Resort</div>
+              <div class="hotel-tagline">Stormalong Bay — the sprawling pool complex shared with the Yacht Club — is reason enough. Walking distance to Epcot is the bonus.</div>
+              <div class="hotel-tags">
+                <span class="tag">Walk to Epcot</span>
+                <span class="tag">Stormalong Bay Pool</span>
+                <span class="tag">Beaches & Cream</span>
+              </div>
+              <div class="advisor-note">
+                <span class="advisor-note-icon">✦</span>
+                <span class="advisor-note-text">If you're an EPCOT Food & Wine devotees, this is your resort. You can walk back for a nap mid-festival and return for dinner without a second thought.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <div class="hotel-img" style="background:linear-gradient(145deg,#e8f0e0,#a0c090)">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0.35">
+                <svg viewBox="0 0 100 80" width="70" fill="none">
+                  <polygon points="50,5 80,50 20,50" fill="#c4a97d" opacity="0.7"/>
+                  <polygon points="35,30 65,65 5,65" fill="#e0eee0" opacity="0.6"/>
+                  <path d="M10 60 Q50 48 90 60 L90 80 L10 80Z" fill="#fff" opacity="0.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="hotel-body">
+              <div class="hotel-tier"><span class="hotel-tier-dot"></span> Deluxe · Best Value Deluxe</div>
+              <div class="hotel-name">Disney's Wilderness Lodge</div>
+              <div class="hotel-tagline">National Park lodge vibes, a roaring lobby fireplace, and some of the best theming on property — at the lowest price point of any Disney deluxe resort.</div>
+              <div class="hotel-tags">
+                <span class="tag">Boat to Magic Kingdom</span>
+                <span class="tag">Artist Point</span>
+                <span class="tag">Geyser Pool</span>
+              </div>
+              <div class="advisor-note">
+                <span class="advisor-note-icon">✦</span>
+                <span class="advisor-note-text">The best-kept secret in Disney deluxe. The boat to Magic Kingdom feels special every single time.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hotel-card">
+            <div class="hotel-img" style="background:linear-gradient(145deg,#f0ece0,#d8c8a0)">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0.35">
+                <svg viewBox="0 0 100 80" width="70" fill="none">
+                  <rect x="10" y="25" width="80" height="50" fill="#fff" rx="4"/>
+                  <rect x="25" y="10" width="50" height="70" fill="#f0ece0"/>
+                  <rect x="38" y="30" width="24" height="32" rx="12" fill="#c4a97d" opacity="0.8"/>
+                  <circle cx="76" cy="18" r="10" fill="#f0c040" opacity="0.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="hotel-body">
+              <div class="hotel-tier"><span class="hotel-tier-dot"></span> Deluxe · Best Dining Views</div>
+              <div class="hotel-name">Disney's Riviera Resort</div>
+              <div class="hotel-tagline">Home to Topolino's Terrace, rooftop views of two parks' fireworks, and Skyliner access to EPCOT and Hollywood Studios. Europe-inspired and genuinely elegant.</div>
+              <div class="hotel-tags">
+                <span class="tag">Disney Skyliner</span>
+                <span class="tag">Topolino's Terrace</span>
+                <span class="tag">Rooftop Views</span>
+              </div>
+              <div class="advisor-note">
+                <span class="advisor-note-icon">✦</span>
+                <span class="advisor-note-text">Book Topolino's character breakfast the moment your 60-day window opens. It sells out within hours and is genuinely the best character meal on property.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DINING -->
+      <div class="section-block" id="dining">
+        <span class="eyebrow">Restaurants & Dining</span>
+        <h2>Tables worth <em>fighting for</em></h2>
+        <p class="section-intro">Disney dining reservations open 60 days before your trip — and the best tables disappear in minutes. These are the ones I'll help you secure before you even pack your bag.</p>
+        <div class="rule"></div>
+
+        <div class="dining-grid">
+
+          <div class="dining-card">
+            <div class="dining-card-top">
+              <div class="dining-name">Topolino's Terrace</div>
+              <div class="dining-price">$$$</div>
+            </div>
+            <div class="dining-loc">Riviera Resort · Rooftop</div>
+            <div class="dining-desc">Rooftop French-Italian fine dining with sweeping views of two parks' fireworks. The character breakfast with Mickey in his European vacation best is the best character meal on property.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Ricotta appetizer, Filet Mignon, sour cream waffles at breakfast</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top">
+              <div class="dining-name">California Grill</div>
+              <div class="dining-price">$$$</div>
+            </div>
+            <div class="dining-loc">Contemporary Resort · 15th Floor</div>
+            <div class="dining-desc">The quintessential Disney splurge — Pacific-inspired cuisine perched above Magic Kingdom with fireworks visible from your table. Request a window seat; don't negotiate on this.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Oak-fired beef, Florida black grouper, sushi</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top">
+              <div class="dining-name">Cinderella's Royal Table</div>
+              <div class="dining-price">$$$$</div>
+            </div>
+            <div class="dining-loc">Inside Cinderella Castle · Magic Kingdom</div>
+            <div class="dining-desc">Dining inside the castle, with princess character greetings. Completely impractical, genuinely magical, and worth every penny if you have little ones who believe in fairy tales.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Filet of beef tenderloin, Jaq & Gus cheesecake</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top">
+              <div class="dining-name">Tiffins</div>
+              <div class="dining-price">$$$</div>
+            </div>
+            <div class="dining-loc">Disney's Animal Kingdom</div>
+            <div class="dining-desc">The most underrated restaurant on property — an art gallery meets globe-trotting Imagineer dinner. Inspired by the travels that created Animal Kingdom, with genuinely exceptional food.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Whole fried sustainable fish, spiced chickpea salad</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top">
+              <div class="dining-name">Le Cellier Steakhouse</div>
+              <div class="dining-price">$$$</div>
+            </div>
+            <div class="dining-loc">Canada Pavilion · EPCOT</div>
+            <div class="dining-desc">A cozy Canadian steakhouse tucked into the EPCOT World Showcase. One of the most consistently excellent meals on property, year after year — and nearly impossible to book without a plan.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Canadian cheddar cheese soup, filet mignon</div>
+          </div>
+
+          <div class="dining-card">
+            <div class="dining-card-top">
+              <div class="dining-name">La Cava del Tequila</div>
+              <div class="dining-price">$$</div>
+            </div>
+            <div class="dining-loc">Mexico Pavilion · EPCOT</div>
+            <div class="dining-desc">No reservations, no kids required — just 200+ tequilas in a candlelit cave inside the Mayan pyramid at EPCOT. The happiest surprise at any Disney trip. Walk-up only.</div>
+            <div class="dining-must">→ <strong>Order:</strong> Classic margarita, guacamole, elote</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- THINGS TO DO -->
+      <div class="section-block" id="todo">
+        <span class="eyebrow">Things to Do</span>
+        <h2>Experiences not to <em>miss</em></h2>
+        <p class="section-intro">Walt Disney World is overwhelming by design. Here's the shortlist — experiences that are genuinely worth the lines, and the ones I'll build your entire park day around.</p>
+        <div class="rule"></div>
+
+        <div class="todo-list">
+
+          <div class="todo-item">
+            <div class="todo-num">01</div>
+            <div>
+              <div class="todo-name">TRON Lightcycle / Run — Magic Kingdom</div>
+              <div class="todo-desc">The fastest roller coaster at Walt Disney World, housed in a spectacular glowing structure beside Space Mountain. Book a Lightning Lane reservation the moment the park opens — or use Individual Lightning Lane at 7am.</div>
+              <div class="todo-badge">⚡ Lightning Lane Priority</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">02</div>
+            <div>
+              <div class="todo-name">Guardians of the Galaxy: Cosmic Rewind — EPCOT</div>
+              <div class="todo-desc">A reverse-launching indoor coaster that plays a curated 80s soundtrack synced to the ride. One of Disney's most technically impressive attractions — and the line moves slowly, so the Individual Lightning Lane is worth every dollar.</div>
+              <div class="todo-badge">⚡ Individual Lightning Lane</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">03</div>
+            <div>
+              <div class="todo-name">Star Wars: Galaxy's Edge — Hollywood Studios</div>
+              <div class="todo-desc">An entire land built around immersive storytelling. Rise of the Resistance is a must — arguably the most technically impressive attraction Disney has ever built. Smugglers Run lets you pilot the Millennium Falcon. Book both.</div>
+              <div class="todo-badge">⚡ Lightning Lane Priority</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">04</div>
+            <div>
+              <div class="todo-name">EPCOT World Showcase at Night</div>
+              <div class="todo-desc">Eleven countries, unlimited snacks and drinks, and EPCOT Forever playing over the lagoon at nightfall. The most underrated two hours at Disney World — slow down, eat your way around the world, and skip the park-hopping rush.</div>
+              <div class="todo-badge">🌙 Evening Experience</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">05</div>
+            <div>
+              <div class="todo-name">Pandora — World of Avatar · Animal Kingdom</div>
+              <div class="todo-desc">Flight of Passage is a transcendent simulator experience that still feels like the future, years after opening. The floating mountains at night are genuinely stunning. Na'vi River Journey is the calming counterpart — perfect with little ones.</div>
+              <div class="todo-badge">⚡ Lightning Lane Priority</div>
+            </div>
+          </div>
+
+          <div class="todo-item">
+            <div class="todo-num">06</div>
+            <div>
+              <div class="todo-name">Magic Kingdom Fireworks — Happily Ever After</div>
+              <div class="todo-desc">The nightly fireworks and projection show over Cinderella Castle. Watch from the bridge between the hub and Tomorrowland for the best sightlines, or time your California Grill reservation to watch from 15 floors up with a glass of wine.</div>
+              <div class="todo-badge">🎆 Nightly · No Reservation</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- GETTING THERE -->
+      <div class="section-block" id="getting-there">
+        <span class="eyebrow">Getting There</span>
+        <h2>Arriving <em>without the stress</em></h2>
+        <p class="section-intro">Orlando International Airport (MCO) is your arrival point — about 25 miles from the Walt Disney World Resort. Here's how to handle the transfer like a pro.</p>
+        <div class="rule"></div>
+
+        <div class="transport-grid">
+
+          <div class="transport-card">
+            <div class="transport-icon">✈️</div>
+            <div class="transport-name">Flying In</div>
+            <div class="transport-desc">Orlando International (MCO) is the primary airport, served by every major carrier. Orlando Sanford (SFB) is a secondary option but significantly farther from property and with fewer direct routes.</div>
+            <div class="transport-tip">Book nonstops whenever possible — Orlando afternoon thunderstorms cause cascading delays in summer.</div>
+          </div>
+
+          <div class="transport-card">
+            <div class="transport-icon">🚗</div>
+            <div class="transport-name">Private Car Transfer</div>
+            <div class="transport-desc">My recommendation for families: a pre-booked private car service from MCO direct to your resort. 30–40 minutes, no waiting around, car seats arranged in advance. Runs $80–120 depending on vehicle size.</div>
+            <div class="transport-tip">I coordinate this for my clients — one less thing to think about on arrival day.</div>
+          </div>
+
+          <div class="transport-card">
+            <div class="transport-icon">🚌</div>
+            <div class="transport-name">Mears Connect</div>
+            <div class="transport-desc">The shuttle service that replaced Magical Express. Standard (shared, multiple stops) runs ~$34/adult roundtrip. Express (direct to your resort) runs ~$250 for up to 4 guests. Reliable, but slower than private car.</div>
+            <div class="transport-tip">Book Express, not Standard — shared shuttles can add 45+ minutes to your arrival.</div>
+          </div>
+
+          <div class="transport-card">
+            <div class="transport-icon">🚙</div>
+            <div class="transport-name">Rideshare / Rental Car</div>
+            <div class="transport-desc">Uber/Lyft runs around $40–60 from MCO (surge pricing applies). Rental cars are complimentary to park at Disney hotels. If you're planning day trips beyond property, a rental car gives you flexibility.</div>
+            <div class="transport-tip">Schedule your Uber in advance to lock the price — surge pricing at MCO arrivals is real.</div>
+          </div>
+
+        </div>
+
+        <div style="background:var(--cream);border-radius:14px;padding:1.25rem 1.5rem;margin-top:1.25rem;display:flex;gap:0.75rem;align-items:flex-start">
+          <span style="color:var(--terra);font-size:1rem;flex-shrink:0;margin-top:2px">✦</span>
+          <div>
+            <div style="font-size:0.82rem;font-weight:500;color:var(--ink);margin-bottom:0.25rem">On-Property Transportation</div>
+            <div style="font-size:0.8rem;color:var(--ink-light);line-height:1.65">Once you're on Disney property, it's all free — buses to every park, the Disney Skyliner gondola connecting EPCOT and Hollywood Studios to select resorts, the Magic Kingdom monorail, and boats to select locations. Staying on property means you never need a car to get to a park.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FULL GUIDE CTA -->
+      <div class="guide-cta-block" id="guide">
+        <div>
+          <span class="guide-cta-eyebrow">✦ Prospect Travel · Disney Guide</span>
+          <div class="guide-cta-title">Ready for the full <em>deep dive?</em></div>
+          <div class="guide-cta-desc">The complete Prospect Travel Disney planning guide — park strategies, Lightning Lane tips, packing lists, best weeks to visit, and every insider detail — lives on the journal. Updated regularly.</div>
+        </div>
+        <a href="https://yoursubstack.substack.com" target="_blank" rel="noopener" class="btn-gold-lg">Read the full guide ↗</a>
+      </div>
+
+      <!-- OTHER DESTINATIONS -->
+      <div class="other-dest">
+        <div class="other-dest-title">Explore more <em>destinations</em></div>
+        <div class="other-dest-grid">
+          <div class="dest-pill-card">
+            <div class="dest-pill-bg bg-nantucket"></div>
+            <div class="dest-pill-overlay"></div>
+            <div class="dest-pill-info">
+              <div class="dest-pill-region">Massachusetts</div>
+              <div class="dest-pill-name">Nantucket</div>
+            </div>
+          </div>
+          <div class="dest-pill-card">
+            <div class="dest-pill-bg bg-palmbeach"></div>
+            <div class="dest-pill-overlay"></div>
+            <div class="dest-pill-info">
+              <div class="dest-pill-region">Florida</div>
+              <div class="dest-pill-name">Palm Beach</div>
+            </div>
+          </div>
+          <div class="dest-pill-card">
+            <div class="dest-pill-bg bg-aspen"></div>
+            <div class="dest-pill-overlay"></div>
+            <div class="dest-pill-info">
+              <div class="dest-pill-region">Colorado</div>
+              <div class="dest-pill-name">Aspen</div>
+            </div>
+          </div>
+          <div class="dest-pill-card">
+            <div class="dest-pill-bg bg-telluride"></div>
+            <div class="dest-pill-overlay"></div>
+            <div class="dest-pill-info">
+              <div class="dest-pill-region">Colorado</div>
+              <div class="dest-pill-name">Telluride</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /main-col -->
+
+    <!-- SIDEBAR -->
+    <div class="side-col">
+
+      <div class="sidebar-cta">
+        <div class="sidebar-cta-title">Plan your<br><em>Disney trip</em><br>with me.</div>
+        <div class="sidebar-cta-desc">I handle every reservation, strategy, and detail — so your family just shows up and makes memories.</div>
+        <a href="index.html#contact" class="btn-gold">Start planning ✦</a>
+      </div>
+
+      <div class="sidebar-card" style="margin-top:1.25rem">
+        <div class="sidebar-card-title">Advisor's Disney tips</div>
+        <ul class="sidebar-list">
+          <li>Dining reservations open exactly 60 days before check-in — set an alarm and be ready at 6am EST.</li>
+          <li>Lightning Lane Multi Pass is almost always worth it for families with young children — buy it the morning of, not the night before.</li>
+          <li>Rope drop is still the most powerful strategy at any park. Arrive 45 minutes early.</li>
+          <li>EPCOT's International Food & Wine Festival runs late summer through November — one of the best times to visit.</li>
+          <li>Deluxe resort guests get extended evening hours at select parks — a genuine perk that clears crowds dramatically.</li>
+          <li>Book a rest day mid-trip, especially with kids. Half-day at the pool midweek makes the whole vacation better.</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Best times to visit</div>
+        <ul class="sidebar-list">
+          <li><strong style="color:var(--ink)">January–February</strong> — Lowest crowds of the year, comfortable weather</li>
+          <li><strong style="color:var(--ink)">Late September–October</strong> — Mickey's Not-So-Scary, Food & Wine, mild temps</li>
+          <li><strong style="color:var(--ink)">Early December</strong> — Christmas decor at its peak, before the holiday rush</li>
+          <li><strong style="color:var(--ink)">Avoid:</strong> Spring Break, July 4th week, Thanksgiving, and Christmas week</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-guide">
+        <span class="sidebar-guide-label">On the journal</span>
+        <div class="sidebar-guide-title">The complete<br><em>Disney planning</em><br>guide</div>
+        <a href="https://yoursubstack.substack.com" target="_blank" rel="noopener" class="btn-outline-light">Read on Substack ↗</a>
+      </div>
+
+    </div><!-- /side-col -->
+
+  </div><!-- /two-col -->
+</div><!-- /page-body -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Prospect <em>Travel</em></div>
+    <ul class="footer-links-row">
+      <li><a href="index.html#destinations">Destinations</a></li>
+      <li><a href="index.html#guides">Guides</a></li>
+      <li><a href="index.html#journal">Journal</a></li>
+      <li><a href="index.html#contact">Start Planning</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 Prospect Travel · Fora Network</div>
+  </div>
+</footer>
+
+<script>
+// Stars
+const starsEl = document.getElementById('stars');
+for(let i=0;i<90;i++){
+  const s=document.createElement('div');
+  s.className='hero-star';
+  const sz=Math.random()*2.5+0.5;
+  s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s`;
+  starsEl.appendChild(s);
+}
+
+// TOC active state on scroll
+const sections = document.querySelectorAll('.section-block');
+const tocLinks = document.querySelectorAll('.toc-link');
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      tocLinks.forEach(l=>l.classList.remove('active'));
+      const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+},{threshold:0.3,rootMargin:'-130px 0px -50% 0px'});
+sections.forEach(s=>observer.observe(s));
+</script>
+
+</body>
+</html>
